@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "882580989530",
+    "firebase_url": "https://fir-notification-542d7.firebaseio.com",
+    "project_id": "fir-notification-542d7",
+    "storage_bucket": "fir-notification-542d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882580989530:android:b3569c49b9775d56",
+        "android_client_info": {
+          "package_name": "com.nightvisionmedia.firebasenotificationexam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882580989530-b082im50bm942269f5fot46ip79oi0n6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWYrKRhVcr3DyuoqVXKf8ZzFG-6e02ndw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882580989530:android:ca3a8208e21235ce",
+        "android_client_info": {
+          "package_name": "com.nightvisionmedia.emergencyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882580989530-b082im50bm942269f5fot46ip79oi0n6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWYrKRhVcr3DyuoqVXKf8ZzFG-6e02ndw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

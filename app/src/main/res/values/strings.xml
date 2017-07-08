@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">EmergencyApp</string>
+
+
+    <!--******************************************************ARRAYS***********************************************************-->
+    <array name="more_recycler_view_titles">
+        <item>Log Out</item>
+        <item>Directory</item>
+        <item>Share</item>
+        <item>Rate</item>
+        <item>Settings</item>
+        <item>About</item>
+    </array>
+
+
+    <array name="directory_agencies_names">
+        <item>Office of Disaster Preparedness and Emergency Management (ODPEM)</item>
+        <item>National Water Commission (NWC)</item>
+        <item>National Works Agency (NWA)</item>
+        <!--<item>Jamaica Public Service (JPS)</item>-->
+        <!--<item>National Environment and Planning Agency (NEPA)</item>-->
+    </array>
+
+    <array name="directory_agencies_info">
+        <item>
+            ABOUT:\n
+            The ODPEM has the unique role of being the only government agency to provide disaster
+            management functions in Jamaica. Disaster preparedness is a dynamic function, which
+            includes
+            the identification of disaster threats and risks throughout the country and the
+            formulation
+            of plans to create a state of readiness to meet the needs of victims when a disaster
+            strikes.\n\n
+
+            ADDRESS: 2-4 Haining Rd, Kingston, Jamaica\n\n
+
+            CONTACT:\n
+            TELEPHONE: (876) 906-9674-5 or (876) 754-9077-8\n\n
+
+            TOLL FREE: 1-888-2255-637\n\n
+
+            EMAIL: odpem@cwjamaica.com\n\n
+
+            WEBSITE: www.odpem.org.jm/\n\n
+        </item>
+        <item>
+            ABOUT:\n
+            The NWC supplies 190 million gallons of potable water each day to its
+            more than 400,000 registered accounts representing about 2 million persons across
+            Jamaica. Within the last five decades, the growth of the industrial sector added
+            to the establishment of several new residential communities in various sections of
+            St. Andrew, St. Catherine and many other parishes across Jamaica, has led to the
+            increased demand for potable water.\n\n
+
+            ADDRESS:\n
+            Corporate Office: 28 Barbados Avenue, Kingston 5\n
+
+            For More Office Locations: http://www.nwcjamaica.com/Offices\n\n
+
+            CONTACT:\n
+            TOLL FREE: 1.888.CALL.NWC (1-888-225-5692)\n\n
+
+            WEBSITE: http://www.nwcjamaica.com
+        </item>
+
+        <item>
+            ABOUT:\n
+            The National Works Agency is directly responsible for Jamaica\'s main road network,
+            consisting of approximately 5000 km of class A, B and C roads. This network forms 19
+            percent
+            of the total road surface available to a nation which relies almost exclusively on
+            roads,
+            as the means of moving around the island. More than 90 percent of the main road network
+            is paved.
+            The NWA also has 736 bridges on its main road network.\n
+            For More Info: http://www.nwa.gov.jm/history\n\n
+
+            ADDRESS:\n
+            140 Maxfield Avenue Kingston 10\n\n
+
+            CONTACT:\n
+            TELEPHONE: 1-876-926-3210-9\n
+            DIGICEL: 1-876-618-ROAD(7623)/1-876-618-7623\n
+            TOLL FREE: 1-888-429-5692\n\n
+
+            WEBSITE: http://www.nwa.gov.jm
+        </item>
+    </array>
+</resources>
