@@ -10,7 +10,12 @@
 
     <item android:id="@+id/alertsRefresh"
         android:icon="@android:drawable/stat_notify_sync_noanim"
-        android:title="Search"
+        android:title="Refresh"
+        yourapp:showAsAction="ifRoom" />
+
+    <item android:id="@+id/alertsFavorites"
+        android:icon="@android:drawable/star_big_off"
+        android:title="Favorites"
         yourapp:showAsAction="ifRoom" />
 
 </menu>

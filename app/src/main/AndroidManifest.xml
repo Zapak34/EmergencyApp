@@ -56,7 +56,8 @@
 
         <activity android:name=".activities.AdminSendNotifications" />
         <activity android:name=".activities.DirectoryScreenActivity" />
-        <activity android:name=".activities.ShowAlertsContentActivity"></activity>
+        <activity android:name=".activities.ShowAlertsContentActivity" />
+        <activity android:name=".activities.AlertsFavScreenActivity"></activity>
     </application>
 
 </manifest>

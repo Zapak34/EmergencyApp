@@ -74,8 +74,6 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
                 intent.putExtra("title",holder.title.getText().toString());
                 intent.putExtra("content",holder.content.getText().toString());
                 intent.putExtra("image_url",holder.image_url);
-//                intent.putExtra("status",isRead);
-//                intent.putExtra("type","alert");
                 context.startActivity(intent);
                 //Message.shortToast(context,holder.content.getText().toString());
             }

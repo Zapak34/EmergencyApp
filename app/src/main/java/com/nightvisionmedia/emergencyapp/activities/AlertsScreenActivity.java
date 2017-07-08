@@ -135,6 +135,9 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
                 SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
                 searchView.setOnQueryTextListener(AlertsScreenActivity.this);
                 break;
+            case R.id.alertsFavorites:
+                startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                break;
         }
         return true;
     }
