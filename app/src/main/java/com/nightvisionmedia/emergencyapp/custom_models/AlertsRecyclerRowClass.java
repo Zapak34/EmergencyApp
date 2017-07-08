@@ -25,15 +25,15 @@ public class AlertsRecyclerRowClass {
     }
 
     public String getContent() {
-        return content;
+        return content.replace("~","'");
     }
 
     public void setContent(String message) {
-        this.content = message;
+        this.content = message.replace("~","'");
     }
 
     public String getImage_link() {
-        return image_link;
+        return image_link.replace("~","'");
     }
 
     public void setImage_link(String image_link) {
@@ -41,7 +41,7 @@ public class AlertsRecyclerRowClass {
     }
 
     public String getTitle() {
-        return title;
+        return title.replace("~","'");
     }
 
     public void setTitle(String title) {
