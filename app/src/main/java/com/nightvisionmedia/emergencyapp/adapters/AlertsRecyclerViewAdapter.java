@@ -26,7 +26,7 @@ import java.util.List;
 public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecyclerViewAdapter.ViewHolder>{
     private Context context;
     private List<AlertsRecyclerRowClass> my_data;
-    private long count;
+
 
     public AlertsRecyclerViewAdapter(Context context, List<AlertsRecyclerRowClass> my_data) {
         this.context = context;
@@ -49,6 +49,8 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
         holder.content.setText(my_data.get(position).getContent());
         holder.time_posted.setText(my_data.get(position).getTime_posted());
         holder.image_url = my_data.get(position).getImage_link();
+
+
         //this make the title text view focus so it can start to scroll
         holder.title.setSelected(true);
         holder.title.requestFocus();
@@ -61,8 +63,8 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
         }
 
         String[] temp = {String.valueOf(holder.alertID)};
-        count =  AlertsFavorites.count(AlertsFavorites.class, "alert_id = ?",temp);
-        if(count > 0){
+        holder.count =  AlertsFavorites.count(AlertsFavorites.class, "alert_id = ?",temp);
+        if(holder.count > 0){
             holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
         }else{
             holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
@@ -75,30 +77,37 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
                 intent.putExtra("content",holder.content.getText().toString());
                 intent.putExtra("image_url",holder.image_url);
                 context.startActivity(intent);
-                //Message.shortToast(context,holder.content.getText().toString());
             }
         });
 
         holder.ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.ivFavorite.getDrawable().getConstantState() == context.getResources().getDrawable( R.mipmap.ic_star_off).getConstantState()){
-                    AlertsFavorites alertsFavorites = new AlertsFavorites();
-                    alertsFavorites.setAlertID(holder.alertID);
-                    alertsFavorites.setAlertTitle(holder.title.getText().toString());
-                    alertsFavorites.setAlertContent(holder.content.getText().toString());
-                    alertsFavorites.setAlertImageURL(holder.image_url);
-                    alertsFavorites.setAlertPostedTime(holder.time_posted.getText().toString());
-                    alertsFavorites.save();
-                    holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
-                    Message.longToast(context, "Favorite Saved...");
-                }else if(holder.ivFavorite.getDrawable().getConstantState() == context.getResources().getDrawable( R.mipmap.ic_star_on).getConstantState()){
-                    AlertsFavorites.deleteAll(AlertsFavorites.class, "alert_id = ?", String.valueOf(holder.alertID));
-                    holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
-                    Message.longToast(context, "Favorite Removed...");
-                }else{
-                    Message.longToast(context, "Cannot Favorite While Searching...");
-                }
+                String[] temp = {String.valueOf(holder.alertID)};
+                long countTemp =  AlertsFavorites.count(AlertsFavorites.class, "alert_id = ?",temp);
+                    if(holder.count == 0)
+                    {
+                        //querying list return empty, there is no record found matching the query.
+                        AlertsFavorites alertsFavorites = new AlertsFavorites();
+                        alertsFavorites.setAlertID(holder.alertID);
+                        alertsFavorites.setAlertTitle(holder.title.getText().toString());
+                        alertsFavorites.setAlertContent(holder.content.getText().toString());
+                        alertsFavorites.setAlertImageURL(holder.image_url);
+                        alertsFavorites.setAlertPostedTime(holder.time_posted.getText().toString());
+                        alertsFavorites.save();
+
+                        holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
+                        Message.longToast(context, "Favorite Saved..."+holder.count+" : "+countTemp);
+                    }
+
+                    if(countTemp > 0)
+                    {
+
+                        //there are records matching your query.
+                        AlertsFavorites.deleteAll(AlertsFavorites.class, "alert_id = ?", String.valueOf(holder.alertID));
+                        holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
+                        Message.longToast(context, "Favorite Removed..."+holder.count+" : "+countTemp);
+                    }
 
             }
         });
@@ -116,7 +125,7 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
         public TextView content, title, time_posted;
         public ImageView ivAlertImage, ivFavorite;
         public String image_url;
-        public List<AlertsFavorites> alertFav;
+        public long count;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -36,7 +36,7 @@ public class ShowAlertsContentActivity extends AppCompatActivity {
 
         tvTitle.setSelected(true);
         tvTitle.requestFocus();
-        if(image_url == "" || image_url.contains(" ")){
+        if(image_url == "" || image_url.contains(" ") || image_url.isEmpty()){
          ivContentPic.setVisibility(View.GONE);
         }else{
             ivContentPic.setVisibility(View.VISIBLE);

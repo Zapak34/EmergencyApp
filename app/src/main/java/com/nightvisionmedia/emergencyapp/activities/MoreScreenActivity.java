@@ -108,4 +108,10 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(MoreScreenActivity.this, HomeScreenActivity.class));
+    }
 }

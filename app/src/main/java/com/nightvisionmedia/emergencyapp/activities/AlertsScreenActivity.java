@@ -197,4 +197,10 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
         adapter.setFilter(newList);
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AlertsScreenActivity.this, HomeScreenActivity.class));
+    }
 }

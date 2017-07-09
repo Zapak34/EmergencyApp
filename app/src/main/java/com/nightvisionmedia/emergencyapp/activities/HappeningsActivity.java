@@ -56,4 +56,10 @@ public class HappeningsActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(HappeningsActivity.this, HomeScreenActivity.class));
+    }
 }

@@ -55,4 +55,10 @@ public class INeedHelpActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(INeedHelpActivity.this, HomeScreenActivity.class));
+    }
+
 }
