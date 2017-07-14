@@ -92,18 +92,6 @@ public class SharedPrefManager {
         return sharedPreferences.getBoolean(USER_SAVED_OFFLINE_KEY,DEFAULT_IS_SAVED);
     }
 
-    public void setUserProfilePic(int picId){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
-        Editor editor = sharedPreferences.edit();
-        editor.putInt(USER_PROFILE_PIC_KEY,picId);
-        editor.apply();
-
-    }
-    public int getUserProfilePic(){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(USER_PROFILE_PIC_KEY,0);
-    }
-
     public void saveAutomaticLogin(int isSaved){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
@@ -114,6 +102,13 @@ public class SharedPrefManager {
     public int getAutomaticLogin(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(USER_AUTO_LOGIN_KEY,-1);
+    }
+
+    public void logoutFromApp(int logout){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
+        Editor editor = sharedPreferences.edit();
+        editor.putInt(USER_AUTO_LOGIN_KEY, logout);
+        editor.apply();
     }
 
     public void loginScreenSaveAutoLoginShown(int isSaved){
@@ -128,40 +123,13 @@ public class SharedPrefManager {
         return sharedPreferences.getInt(USER_AUTO_LOGIN_SHOWN_FOR_FIRST_TIME,-1);
     }
 
+
     public void appFirstTimeStarting(int isSaved){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
         editor.putInt(APP_FIRST_START, isSaved);
         editor.apply();
     }
-
-    public int getAppFirstTimeStarting(){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(APP_FIRST_START,-1);
-    }
-
-    //APP SAVED DATA AFTER LOGIN
-    public void appSaveUserData(String userEmail, String userFname, String userPassword, String userLname,
-                                 String userAge, String userPhoneNumber)
-    {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(APP_USER_OFFLINE_DATA, Context.MODE_PRIVATE);
-        Editor editor = sharedPreferences.edit();
-        editor.putString(USER_EMAIL_KEY,userEmail);
-        editor.putString(USER_PASSWORD_KEY,userPassword);
-        editor.putString(USER_FNAME_KEY,userFname);
-        editor.putString(USER_LNAME_KEY,userLname);
-        editor.putString(USER_AGE_KEY,userAge);
-        editor.putString(USER_PHONE_KEY,userPhoneNumber);
-        editor.apply();
-    }
-
-
-    //APP GET DATA
-    public String appGetUserSaveData(String userData){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(APP_USER_OFFLINE_DATA, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(userData,null);
-    }
-
 
     public void deleteOfflineUserInfo(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);

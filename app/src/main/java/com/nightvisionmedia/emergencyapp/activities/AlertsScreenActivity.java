@@ -1,6 +1,9 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -51,7 +54,13 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
 
         recyclerView = (RecyclerView)findViewById(R.id.alertsRecyclerView);
         data_list = new ArrayList<>();
-        load_data_from_server();
+        boolean hasInternet = isNetworkAvailable();
+        if(!hasInternet){
+            Message.longToast(AlertsScreenActivity.this, "There is no internet connection...");
+        }else {
+            load_data_from_server();
+        }
+
 
 
         toolbar = (Toolbar)findViewById(R.id.alertsToolbar);
@@ -113,6 +122,14 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
         });
 
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -197,6 +214,9 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
         adapter.setFilter(newList);
         return true;
     }
+
+
+
 
     @Override
     public void onBackPressed() {

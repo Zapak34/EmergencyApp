@@ -65,6 +65,12 @@
                     android:paddingLeft="10dp"
                     android:text="time_posted" />
 
+                <ImageView
+                    android:id="@+id/ivAlertsFavDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:src="@android:drawable/ic_menu_delete" />
             </LinearLayout>
 
         </LinearLayout>

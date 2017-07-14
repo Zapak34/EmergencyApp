@@ -80,6 +80,29 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
             }
         });
 
+        holder.content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,ShowAlertsContentActivity.class);
+                intent.putExtra("title",holder.title.getText().toString());
+                intent.putExtra("content",holder.content.getText().toString());
+                intent.putExtra("image_url",holder.image_url);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,ShowAlertsContentActivity.class);
+                intent.putExtra("title",holder.title.getText().toString());
+                intent.putExtra("content",holder.content.getText().toString());
+                intent.putExtra("image_url",holder.image_url);
+                context.startActivity(intent);
+            }
+        });
+
+
         holder.ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +120,7 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
                         alertsFavorites.save();
 
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
-                        Message.longToast(context, "Favorite Saved..."+holder.count+" : "+countTemp);
+                        Message.longToast(context, "Favorite Saved...");
                     }
 
                     if(countTemp > 0)
@@ -106,7 +129,7 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
                         //there are records matching your query.
                         AlertsFavorites.deleteAll(AlertsFavorites.class, "alert_id = ?", String.valueOf(holder.alertID));
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
-                        Message.longToast(context, "Favorite Removed..."+holder.count+" : "+countTemp);
+                        Message.longToast(context, "Favorite Removed...");
                     }
 
             }

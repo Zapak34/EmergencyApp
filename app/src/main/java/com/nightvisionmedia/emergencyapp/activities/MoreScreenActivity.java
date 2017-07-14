@@ -15,6 +15,8 @@ import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.adapters.MoreRecyclerViewAdapter;
 import com.nightvisionmedia.emergencyapp.utils.BottomNavigationHelper;
 import com.nightvisionmedia.emergencyapp.custom_models.MoreRecyclerViewRowClass;
+import com.nightvisionmedia.emergencyapp.utils.Message;
+import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 import java.util.ArrayList;
 
@@ -96,6 +98,10 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
     public void itemClicked(View view, int position) {
         switch(position){
             case 0:
+                SharedPrefManager.getInstance(MoreScreenActivity.this).logoutFromApp(0);
+                startActivity(new Intent(MoreScreenActivity.this,LoginScreenActivity.class));
+                Message.longToast(MoreScreenActivity.this,"You Are Logged Out...");
+                finish();
                 break;
             case 1:
                 startActivity(new Intent(MoreScreenActivity.this,DirectoryScreenActivity.class));
@@ -105,6 +111,9 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
             case 3:
                 break;
             case 4:
+                startActivity(new Intent(MoreScreenActivity.this, SettingsScreenActivity.class));
+                break;
+            case 5:
                 break;
         }
     }

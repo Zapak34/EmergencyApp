@@ -2,36 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/edtEmailAddress"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     tools:context="com.nightvisionmedia.emergencyapp.activities.LoginScreenActivity">
 
-    <TextView
-        android:id="@+id/tvLogo"
+    <ImageView
+        android:id="@+id/ivLogo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="74dp"
-        android:text="LOGO AND APP NAME\nGO HERE..."
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        android:textStyle="bold"
+        android:layout_height="230dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        app:srcCompat="@drawable/nightvisionlogov2" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvLogo"
         android:layout_marginEnd="35dp"
         android:layout_marginStart="35dp"
+        android:layout_below="@id/ivLogo"
         android:layout_marginTop="25dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2">
 
         <EditText
             android:id="@+id/edtLoginEmailAddress"

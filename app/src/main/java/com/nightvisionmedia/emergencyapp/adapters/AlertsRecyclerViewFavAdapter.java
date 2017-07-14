@@ -2,6 +2,7 @@ package com.nightvisionmedia.emergencyapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.activities.ShowAlertsContentActivity;
 import com.nightvisionmedia.emergencyapp.custom_models.AlertsRecyclerRowClass;
 import com.nightvisionmedia.emergencyapp.sugar_models.AlertsFavorites;
+import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.Message;
 
 import java.util.ArrayList;
@@ -59,13 +61,6 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
             Glide.with(context).load(arrayList.get(position).getAlertImageURL()).into(holder.ivAlertImage);
         }
 
-//        String[] temp = {String.valueOf(holder.alertID)};
-//        count =  AlertsFavorites.count(AlertsFavorites.class, "alert_id = ?",temp);
-//        if(count > 0){
-//            holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
-//        }else{
-//            holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
-//        }
         holder.ivAlertImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,27 +73,36 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
             }
         });
 
-//        holder.ivFavorite.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(holder.ivFavorite.getDrawable().getConstantState() == context.getResources().getDrawable( R.mipmap.ic_star_off).getConstantState()){
-//                    AlertsFavorites alertsFavorites = new AlertsFavorites();
-//                    alertsFavorites.setAlertID(holder.alertID);
-//                    alertsFavorites.setAlertTitle(holder.title.getText().toString());
-//                    alertsFavorites.setAlertContent(holder.content.getText().toString());
-//                    alertsFavorites.setAlertImageURL(holder.image_url);
-//                    alertsFavorites.setAlertPostedTime(holder.time_posted.getText().toString());
-//                    alertsFavorites.save();
-//                    Message.longToast(context, "Favorite Saved...");
-//                }else if(holder.ivFavorite.getDrawable().getConstantState() == context.getResources().getDrawable( R.mipmap.ic_star_on).getConstantState()){
-//                    AlertsFavorites.deleteAll(AlertsFavorites.class, "alert_id = ?", String.valueOf(holder.alertID));
-//                    Message.longToast(context, "Favorite Removed...");
-//                }else{
-//                    Message.longToast(context, "Cannot Favorite While Searching...");
-//                }
-//
-//            }
-//        });
+        holder.content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,ShowAlertsContentActivity.class);
+                intent.putExtra("title",holder.title.getText().toString());
+                intent.putExtra("content",holder.content.getText().toString());
+                intent.putExtra("image_url",holder.image_url);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,ShowAlertsContentActivity.class);
+                intent.putExtra("title",holder.title.getText().toString());
+                intent.putExtra("content",holder.content.getText().toString());
+                intent.putExtra("image_url",holder.image_url);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.ivFavDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertsFavorites.deleteAll(AlertsFavorites.class,"alert_id = ?", String.valueOf(holder.alertID));
+                Message.longToast(context, "Favorite Removed...");
+                App.refreshActivity((AppCompatActivity) context);
+            }
+        });
     }
 
     @Override
@@ -111,7 +115,7 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
     public class ViewHolder extends RecyclerView.ViewHolder {
         public int alertID;
         public TextView content, title, time_posted;
-        public ImageView ivAlertImage;
+        public ImageView ivAlertImage, ivFavDelete;
         public String image_url;
 
         public ViewHolder(View itemView) {
@@ -120,6 +124,7 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
             content = (TextView)itemView.findViewById(R.id.tvAlertsRowContent);
             time_posted = (TextView)itemView.findViewById(R.id.tvAlertsTimePosted);
             ivAlertImage = (ImageView)itemView.findViewById(R.id.ivAlertsImage);
+            ivFavDelete = (ImageView)itemView.findViewById(R.id.ivAlertsFavDelete);
         }
     }
 

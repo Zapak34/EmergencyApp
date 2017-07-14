@@ -8,24 +8,26 @@
     tools:context="com.nightvisionmedia.emergencyapp.activities.SplashScreenActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="LOGO GOES \nHERE..."
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SLOGAN GOES HERE..."
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="casual"
+        android:padding="10dp"
+        android:text="Help In The Palm Of Your \nHands..."
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/nightvisionlogov2"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
