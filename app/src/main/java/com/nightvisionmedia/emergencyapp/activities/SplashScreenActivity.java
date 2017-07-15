@@ -26,6 +26,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashScreenActivity.this,LoginScreenActivity.class));
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
-        },4500);
+        },5500);
     }
 }

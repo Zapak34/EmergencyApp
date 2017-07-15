@@ -8,13 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.nightvisionmedia.emergencyapp.R;
-import com.nightvisionmedia.emergencyapp.adapters.AlertsRecyclerViewAdapter;
 import com.nightvisionmedia.emergencyapp.adapters.AlertsRecyclerViewFavAdapter;
-import com.nightvisionmedia.emergencyapp.custom_models.AlertsRecyclerRowClass;
 import com.nightvisionmedia.emergencyapp.sugar_models.AlertsFavorites;
-import com.nightvisionmedia.emergencyapp.utils.Message;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AlertsFavScreenActivity extends AppCompatActivity {

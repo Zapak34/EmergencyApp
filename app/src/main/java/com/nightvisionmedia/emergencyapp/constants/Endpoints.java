@@ -15,6 +15,7 @@ public class Endpoints {
     public static final String URL_REFRESH_SERVER_TOKEN ="http://nightvisionmediaapp.000webhostapp.com/refreshToken.php";
     public static final String URL_SEND_TOKEN_TO_SERVER ="http://nightvisionmediaapp.000webhostapp.com/sendTokenToServer.php";
     public final static String URL_GET_ALERTS ="http://nightvisionmediaapp.000webhostapp.com/getAlerts.php";
+    public final static String URL_GET_HAPPENINGS ="http://nightvisionmediaapp.000webhostapp.com/getHappenings.php";
 
     //URL KEYS
     public static final String KEY_USER_ID = "user_id";

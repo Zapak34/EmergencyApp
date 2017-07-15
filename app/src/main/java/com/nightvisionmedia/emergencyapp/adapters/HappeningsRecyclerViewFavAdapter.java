@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.activities.ShowMainContentActivity;
-import com.nightvisionmedia.emergencyapp.sugar_models.AlertsFavorites;
+import com.nightvisionmedia.emergencyapp.sugar_models.HappeningsFavorites;
 import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.Message;
 
@@ -23,11 +23,11 @@ import java.util.List;
 /**
  * Created by Omar (GAZAMAN) Myers on 7/8/2017.
  */
-public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRecyclerViewFavAdapter.ViewHolder>{
+public class HappeningsRecyclerViewFavAdapter extends RecyclerView.Adapter<HappeningsRecyclerViewFavAdapter.ViewHolder>{
     private Context context;
-    private List<AlertsFavorites> arrayList;
+    private List<HappeningsFavorites> arrayList;
 
-    public AlertsRecyclerViewFavAdapter(Context context, List<AlertsFavorites> arrayList) {
+    public HappeningsRecyclerViewFavAdapter(Context context, List<HappeningsFavorites> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -43,21 +43,21 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         //this sets the text of the text view to its respective data
-        holder.alertID = arrayList.get(position).getAlertID();
-        holder.title.setText(arrayList.get(position).getAlertTitle());
-        holder.content.setText(arrayList.get(position).getAlertContent());
-        holder.image_url = arrayList.get(position).getAlertImageURL();
-        holder.time_posted.setText(arrayList.get(position).getAlertPostedTime());
+        holder.happenID = arrayList.get(position).getHappenID();
+        holder.title.setText(arrayList.get(position).getHappenTitle());
+        holder.content.setText(arrayList.get(position).getHappenContent());
+        holder.image_url = arrayList.get(position).getHappenImageURL();
+        holder.time_posted.setText(arrayList.get(position).getHappenPostedTime());
 
         //this make the title text view focus so it can start to scroll
         holder.title.setSelected(true);
         holder.title.requestFocus();
 
         //this set the image of the image view based on if image link is nul empty
-        if(arrayList.get(position).getAlertImageURL().isEmpty() || arrayList.get(position).getAlertImageURL().contains(" ")){
+        if(arrayList.get(position).getHappenImageURL().isEmpty() || arrayList.get(position).getHappenImageURL().contains(" ")){
             holder.ivAlertImage.setImageResource(R.drawable.image_notpresent);
         }else{
-            Glide.with(context).load(arrayList.get(position).getAlertImageURL()).into(holder.ivAlertImage);
+            Glide.with(context).load(arrayList.get(position).getHappenImageURL()).into(holder.ivAlertImage);
         }
 
         holder.ivAlertImage.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,7 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
         holder.ivFavDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertsFavorites.deleteAll(AlertsFavorites.class,"alert_id = ?", String.valueOf(holder.alertID));
+                HappeningsFavorites.deleteAll(HappeningsFavorites.class,"happen_id = ?", String.valueOf(holder.happenID));
                 Message.longToast(context, "Favorite Removed...");
                 App.refreshActivity((AppCompatActivity) context);
             }
@@ -112,7 +112,7 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
 
     //this class gets the each widget on the template for reference to give it the respective data
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public int alertID;
+        public int happenID;
         public TextView content, title, time_posted;
         public ImageView ivAlertImage, ivFavDelete;
         public String image_url;
@@ -127,7 +127,7 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
         }
     }
 
-    public void setFilter(ArrayList<AlertsFavorites> newList){
+    public void setFilter(ArrayList<HappeningsFavorites> newList){
         arrayList = new ArrayList<>();
         arrayList.addAll(newList);
         notifyDataSetChanged();

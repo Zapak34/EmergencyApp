@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    ></android.support.v7.widget.Toolbar>
+                    />
                 <!--<TextView-->
                     <!--android:layout_width="match_parent"-->
                     <!--android:layout_height="match_parent"-->
@@ -59,12 +59,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"/>
-            <!--<android.support.v4.view.ViewPager-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:id="@+id/container">-->
-
-            <!--</android.support.v4.view.ViewPager>-->
         </RelativeLayout>
 
 

@@ -16,13 +16,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.adapters.AlertsRecyclerViewAdapter;
 import com.nightvisionmedia.emergencyapp.constants.Endpoints;
-import com.nightvisionmedia.emergencyapp.custom_models.AlertsRecyclerRowClass;
+import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
 import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.BottomNavigationHelper;
 import com.nightvisionmedia.emergencyapp.utils.Message;
@@ -44,7 +43,7 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
     private GridLayoutManager gridLayoutManager;
     private LinearLayoutManager linearLayoutManager;
     private AlertsRecyclerViewAdapter adapter;
-    private List<AlertsRecyclerRowClass> data_list;
+    private List<MainRecyclerViewRowClass> data_list;
     private Toolbar toolbar;
 
     @Override
@@ -145,7 +144,7 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
 
         switch (item.getItemId()){
             case R.id.alertsRefresh:
-                load_data_from_server();
+                App.refreshActivity(AlertsScreenActivity.this);
                 Message.shortToast(AlertsScreenActivity.this, "Alert List Refreshed");
                 break;
             case R.id.alertsSearch:
@@ -173,7 +172,7 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
 
                     for(int i = 0; i < array.length(); i++){
                         JSONObject object = array.getJSONObject(i);
-                        AlertsRecyclerRowClass data = new AlertsRecyclerRowClass(object.getInt("alert_id"),object.getString("title"),object.getString("message"),object.getString("image"),object.getString("time_posted"));
+                        MainRecyclerViewRowClass data = new MainRecyclerViewRowClass(object.getInt("alert_id"),object.getString("title"),object.getString("message"),object.getString("image"),object.getString("time_posted"));
                         //Message.shortToast(AlertsScreenActivity.this,array.getJSONArray(i).toString());
                         data_list.add(data);
                     }
@@ -202,8 +201,8 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
     @Override
     public boolean onQueryTextChange(String newText) {
         newText = newText.toLowerCase();
-        ArrayList<AlertsRecyclerRowClass> newList = new ArrayList<>();
-        for(AlertsRecyclerRowClass rowClass: data_list){
+        ArrayList<MainRecyclerViewRowClass> newList = new ArrayList<>();
+        for(MainRecyclerViewRowClass rowClass: data_list){
             String name = rowClass.getTitle().toLowerCase();
             if(name.contains(newText)){
                 newList.add(rowClass);

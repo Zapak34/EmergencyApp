@@ -10,7 +10,7 @@
     <application
         android:name=".appconfig.AppConfig"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/nightvisionlogov2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -56,9 +56,10 @@
 
         <activity android:name=".activities.AdminSendNotifications" />
         <activity android:name=".activities.DirectoryScreenActivity" />
-        <activity android:name=".activities.ShowAlertsContentActivity" />
+        <activity android:name=".activities.ShowMainContentActivity" />
         <activity android:name=".activities.AlertsFavScreenActivity" />
-        <activity android:name=".activities.SettingsScreenActivity"></activity>
+        <activity android:name=".activities.SettingsScreenActivity" />
+        <activity android:name=".activities.HappningsFavScreenActivity"></activity>
     </application>
 
 </manifest>

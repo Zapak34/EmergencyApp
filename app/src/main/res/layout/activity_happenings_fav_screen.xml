@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nightvisionmedia.emergencyapp.activities.HappeningsActivity">
+    tools:context="com.nightvisionmedia.emergencyapp.activities.HappningsFavScreenActivity">
 
 
     <RelativeLayout
@@ -17,44 +17,29 @@
             android:layout_height="@dimen/topToolbarNormal"
             android:id="@+id/relLayoutTopBar"
             android:layout_alignParentTop="true">
+
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/happeningsToolbar"
+                    android:id="@+id/happeningsFavToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     />
             </android.support.design.widget.AppBarLayout>
+
         </RelativeLayout>
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/relLayoutTopBar"
-            android:layout_above="@+id/relLayoutBottomBar">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relLayoutTopBar">
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/happeningsRecyclerView"
+                android:id="@+id/happeningsFavRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"/>
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottomToolbarNormal"
-            android:id="@+id/relLayoutBottomBar"
-            android:layout_alignParentBottom="true">
-            <android.support.design.widget.BottomNavigationView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/bottomNavView_Bar"
-                android:background="@drawable/white_grey_border_top"
-                app:menu="@menu/bottom_navigation_menu">
-            </android.support.design.widget.BottomNavigationView>
         </RelativeLayout>
     </RelativeLayout>
 

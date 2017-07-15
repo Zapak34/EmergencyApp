@@ -15,9 +15,8 @@ import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
 
 import com.nightvisionmedia.emergencyapp.R;
-import com.nightvisionmedia.emergencyapp.activities.AlertsScreenActivity;
 import com.nightvisionmedia.emergencyapp.activities.HomeScreenActivity;
-import com.nightvisionmedia.emergencyapp.activities.ShowAlertsContentActivity;
+import com.nightvisionmedia.emergencyapp.activities.ShowMainContentActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,7 +57,7 @@ public class NotificationManager {
 //                .replace("[dob]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_DOB_KEY)).replace("[age]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_AGE_KEY))
 //                .replace("[address]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_ADDRESS_KEY).replace("_"," ")).replace("[email]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_EMAIL_KEY));
 
-        Intent intent1 =  new Intent(mCtx,ShowAlertsContentActivity.class);
+        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
         intent1.putExtra("NOTIFY_ID",m);
         intent1.putExtra("title",title.replace("~","'"));
         intent1.putExtra("content",newContent);
@@ -107,7 +106,7 @@ public class NotificationManager {
                 .replace("[dob]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_DOB_KEY)).replace("[age]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_AGE_KEY))
                 .replace("[address]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_ADDRESS_KEY).replace("_"," ")).replace("[email]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_EMAIL_KEY));*/
 
-        Intent intent1 =  new Intent(mCtx,ShowAlertsContentActivity.class);
+        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
         intent1.putExtra("NOTIFY_ID",m);
         intent1.putExtra("title",title.replace("~","'"));
         intent1.putExtra("content",newContent);

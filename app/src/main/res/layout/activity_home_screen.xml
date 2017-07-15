@@ -80,7 +80,7 @@
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
-                    android:text="1. Alerts are now touchable in the status bar, 2. Directory for agencies is setup, 3. Automatic Login, 4. Seeing saved Favorites"
+                    android:text="1. Alerts are now touchable in the status bar, 2. Directory for agencies is setup, 3. Automatic Login, changeable in the settings, 4. Seeing saved Favorites"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>

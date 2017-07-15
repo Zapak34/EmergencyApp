@@ -15,16 +15,16 @@
         app:srcCompat="@drawable/nightvisionlogov2" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@id/ivLogo"
         android:layout_marginEnd="35dp"
         android:layout_marginStart="35dp"
-        android:layout_below="@id/ivLogo"
         android:layout_marginTop="25dp"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/edtLoginEmailAddress"

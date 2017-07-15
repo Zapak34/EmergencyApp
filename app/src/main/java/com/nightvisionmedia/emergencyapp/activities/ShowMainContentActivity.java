@@ -9,10 +9,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nightvisionmedia.emergencyapp.R;
-import com.nightvisionmedia.emergencyapp.utils.Message;
 import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
-public class ShowAlertsContentActivity extends AppCompatActivity {
+public class ShowMainContentActivity extends AppCompatActivity {
     private TextView tvTitle, tvContent;
     private ImageView ivContentPic;
     private String title, content, image_url = "",fromNotification;
@@ -40,7 +39,7 @@ public class ShowAlertsContentActivity extends AppCompatActivity {
          ivContentPic.setVisibility(View.GONE);
         }else{
             ivContentPic.setVisibility(View.VISIBLE);
-            Glide.with(ShowAlertsContentActivity.this).load(image_url).into(ivContentPic);
+            Glide.with(ShowMainContentActivity.this).load(image_url).into(ivContentPic);
         }
 
 
@@ -55,10 +54,10 @@ public class ShowAlertsContentActivity extends AppCompatActivity {
         if(intent.hasExtra("image_url")){
             image_url = getIntent().getExtras().getString("image_url");
         }
-        if(intent.hasExtra("isNotification") && SharedPrefManager.getInstance(ShowAlertsContentActivity.this).getAutomaticLogin() == 1){
+        if(intent.hasExtra("isNotification") && SharedPrefManager.getInstance(ShowMainContentActivity.this).getAutomaticLogin() == 1){
             isNotification = 1;
 
-        }else if(intent.hasExtra("isNotification") && SharedPrefManager.getInstance(ShowAlertsContentActivity.this).getAutomaticLogin() == -1){
+        }else if(intent.hasExtra("isNotification") && SharedPrefManager.getInstance(ShowMainContentActivity.this).getAutomaticLogin() == -1){
             isNotification = 2;
         }
 
@@ -69,9 +68,9 @@ public class ShowAlertsContentActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if(isNotification == 1){
-            startActivity(new Intent(ShowAlertsContentActivity.this,AlertsScreenActivity.class));
+            startActivity(new Intent(ShowMainContentActivity.this,AlertsScreenActivity.class));
         }else if(isNotification == 2){
-            startActivity(new Intent(ShowAlertsContentActivity.this,LoginScreenActivity.class));
+            startActivity(new Intent(ShowMainContentActivity.this,LoginScreenActivity.class));
         }
     }
 }

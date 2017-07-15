@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.activities.ShowMainContentActivity;
 import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
-import com.nightvisionmedia.emergencyapp.sugar_models.AlertsFavorites;
+import com.nightvisionmedia.emergencyapp.sugar_models.HappeningsFavorites;
 import com.nightvisionmedia.emergencyapp.utils.Message;
 
 import java.util.ArrayList;
@@ -23,12 +23,12 @@ import java.util.List;
  * Created by Omar (GAZAMAN) Myers on 6/29/2017.
  */
 
-public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecyclerViewAdapter.ViewHolder>{
+public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<HappeningsRecyclerViewAdapter.ViewHolder>{
     private Context context;
     private List<MainRecyclerViewRowClass> my_data;
 
 
-    public AlertsRecyclerViewAdapter(Context context, List<MainRecyclerViewRowClass> my_data) {
+    public HappeningsRecyclerViewAdapter(Context context, List<MainRecyclerViewRowClass> my_data) {
         this.context = context;
         this.my_data = my_data;
     }
@@ -44,7 +44,7 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         //this sets the text of the text view to its respective data
-        holder.alertID = my_data.get(position).getId();
+        holder.happenID = my_data.get(position).getId();
         holder.title.setText(my_data.get(position).getTitle());
         holder.content.setText(my_data.get(position).getContent());
         holder.time_posted.setText(my_data.get(position).getTime_posted());
@@ -62,8 +62,8 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
             Glide.with(context).load(my_data.get(position).getImage_link()).into(holder.ivImage);
         }
 
-        String[] temp = {String.valueOf(holder.alertID)};
-        holder.count =  AlertsFavorites.count(AlertsFavorites.class, "alert_id = ?",temp);
+        String[] temp = {String.valueOf(holder.happenID)};
+        holder.count =  HappeningsFavorites.count(HappeningsFavorites.class, "happen_id = ?",temp);
         if(holder.count > 0){
             holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
         }else{
@@ -106,18 +106,18 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
         holder.ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] temp = {String.valueOf(holder.alertID)};
-                long countTemp =  AlertsFavorites.count(AlertsFavorites.class, "alert_id = ?",temp);
+                String[] temp = {String.valueOf(holder.happenID)};
+                long countTemp =  HappeningsFavorites.count(HappeningsFavorites.class, "happen_id = ?",temp);
                     if(holder.count == 0)
                     {
                         //querying list return empty, there is no record found matching the query.
-                        AlertsFavorites alertsFavorites = new AlertsFavorites();
-                        alertsFavorites.setAlertID(holder.alertID);
-                        alertsFavorites.setAlertTitle(holder.title.getText().toString());
-                        alertsFavorites.setAlertContent(holder.content.getText().toString());
-                        alertsFavorites.setAlertImageURL(holder.image_url);
-                        alertsFavorites.setAlertPostedTime(holder.time_posted.getText().toString());
-                        alertsFavorites.save();
+                        HappeningsFavorites happeningsFavorites = new HappeningsFavorites();
+                        happeningsFavorites.setHappenID(holder.happenID);
+                        happeningsFavorites.setHappenTitle(holder.title.getText().toString());
+                        happeningsFavorites.setHappenContent(holder.content.getText().toString());
+                        happeningsFavorites.setHappenImageURL(holder.image_url);
+                        happeningsFavorites.setHappenPostedTime(holder.time_posted.getText().toString());
+                        happeningsFavorites.save();
 
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
                         Message.longToast(context, "Favorite Saved...");
@@ -127,7 +127,7 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
                     {
 
                         //there are records matching your query.
-                        AlertsFavorites.deleteAll(AlertsFavorites.class, "alert_id = ?", String.valueOf(holder.alertID));
+                        HappeningsFavorites.deleteAll(HappeningsFavorites.class, "happen_id = ?", String.valueOf(holder.happenID));
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
                         Message.longToast(context, "Favorite Removed...");
                     }
@@ -144,7 +144,7 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
 
     //this class gets the each widget on the template for reference to give it the respective data
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public int alertID;
+        public int happenID;
         public TextView content, title, time_posted;
         public ImageView ivImage, ivFavorite;
         public String image_url;

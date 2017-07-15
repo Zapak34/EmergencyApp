@@ -4,11 +4,11 @@ package com.nightvisionmedia.emergencyapp.custom_models;
  * Created by Omar (GAZAMAN) Myers on 6/29/2017.
  */
 
-public class AlertsRecyclerRowClass {
+public class MainRecyclerViewRowClass {
     private int id;
     private String title, content, image_link, time_posted;
 
-    public AlertsRecyclerRowClass(int id, String title, String content, String image_link, String time_posted) {
+    public MainRecyclerViewRowClass(int id, String title, String content, String image_link, String time_posted) {
         this.id = id;
         this.title = title;
         this.content = content;
