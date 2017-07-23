@@ -1,32 +1,21 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.nightvisionmedia.emergencyapp.R;
-import com.nightvisionmedia.emergencyapp.RegisterRequest;
 import com.nightvisionmedia.emergencyapp.async.RegisterAsync;
 import com.nightvisionmedia.emergencyapp.async.SendTokenToServerAsync;
 import com.nightvisionmedia.emergencyapp.utils.DialogHandler;
 import com.nightvisionmedia.emergencyapp.utils.Message;
 import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

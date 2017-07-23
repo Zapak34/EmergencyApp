@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/nightvisionlogov2" />
+        app:srcCompat="@drawable/app_logo" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"

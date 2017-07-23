@@ -76,6 +76,12 @@ public class LoginScreenActivity extends AppCompatActivity {
             pdLoading.show();
         }
 
+        final int isFirstTimeLogin = SharedPrefManager.getInstance(LoginScreenActivity.this).getLoginScreenSaveAutoLoginShown();
+        if(isFirstTimeLogin == 1){
+            final String email = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
+            edtEmailAddress.setText(email);
+        }
+
         final int isAutoLogin = SharedPrefManager.getInstance(LoginScreenActivity.this).getAutomaticLogin();
         if(isAutoLogin == 1){
             final String email = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);

@@ -22,7 +22,7 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivSplashLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/textView2"
@@ -30,6 +30,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="48dp"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/nightvisionlogov2" />
+        app:srcCompat="@drawable/app_logo" />
 
 </RelativeLayout>
