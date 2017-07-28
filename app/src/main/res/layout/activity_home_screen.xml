@@ -11,48 +11,39 @@
         android:layout_height="match_parent"
         android:id="@+id/relLayout">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/topToolbarNormal"
-            android:id="@+id/relLayoutTopBar"
-            android:layout_alignParentTop="true">
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="HOME"
-                    android:textAlignment="center"
-                    />
-                <!--<android.support.design.widget.TabLayout-->
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/topToolbarNormal"-->
+            <!--android:id="@+id/relLayoutTopBar"-->
+            <!--android:layout_alignParentTop="true">-->
+            <!--<android.support.design.widget.AppBarLayout-->
                 <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/tabs"-->
-                <!--app:tabMode="fixed"-->
-                <!--android:background="@drawable/white_grey_border_bottom">-->
-
-                <!--</android.support.design.widget.TabLayout>-->
-            </android.support.design.widget.AppBarLayout>
-        </RelativeLayout>
+                <!--android:layout_height="match_parent">-->
+                <!--<android.support.v7.widget.Toolbar-->
+                    <!--android:id="@+id/homeToolbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--app:titleTextAppearance="@style/Toolbar.TitleTextLarge"-->
+                    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                    <!--/>-->
+            <!--</android.support.design.widget.AppBarLayout>-->
+        <!--</RelativeLayout>-->
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/relLayoutTopBar"
-            android:layout_above="@+id/relLayoutBottomBar">
+            android:id="@+id/relativeLayout">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_height="40dp"
                 android:background="?attr/colorButtonNormal"
                 android:orientation="horizontal"
                 android:weightSum="100"
-                android:id="@+id/linearLayout">
+                android:id="@+id/linearLayout"
+                android:layout_alignParentBottom="true">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -81,40 +72,34 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
                     android:text="1. Alerts are now touchable in the status bar, 2. Directory for agencies is setup, 3. Automatic Login, changeable in the settings, 4. Seeing saved Favorites"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_below="@+id/linearLayout"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" >
-
-                        <Button
-                            android:id="@+id/btnAdminScreen"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0
-            "
-                            android:text="Test Notification" />
-                    </LinearLayout>
-                </ScrollView>
             </LinearLayout>
 
         </RelativeLayout>
 
+
+        <!--<ScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/relLayout"-->
+            <!--android:layout_weight="0-->
+<!--">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btnAdminScreen"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Test Notification" />-->
+            <!--</LinearLayout>-->
+        <!--</ScrollView>-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -129,5 +114,24 @@
                 app:menu="@menu/bottom_navigation_menu">
             </android.support.design.widget.BottomNavigationView>
         </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_above="@+id/relLayoutBottomBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <Button
+                android:id="@+id/btnAdminScreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test Notification" />
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

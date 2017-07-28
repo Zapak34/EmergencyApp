@@ -47,7 +47,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     EditText edtEmailAddress;
     EditText edtPassword;
     Button btnLogin;
-    TextView tvRegisterLink;
+    TextView tvRegisterLink, tvForgotPassword;
 
     UserInformation userInformation;
         String userEmail = "";
@@ -76,12 +76,6 @@ public class LoginScreenActivity extends AppCompatActivity {
             pdLoading.show();
         }
 
-        final int isFirstTimeLogin = SharedPrefManager.getInstance(LoginScreenActivity.this).getLoginScreenSaveAutoLoginShown();
-        if(isFirstTimeLogin == 1){
-            final String email = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
-            edtEmailAddress.setText(email);
-        }
-
         final int isAutoLogin = SharedPrefManager.getInstance(LoginScreenActivity.this).getAutomaticLogin();
         if(isAutoLogin == 1){
             final String email = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
@@ -90,6 +84,14 @@ public class LoginScreenActivity extends AppCompatActivity {
 
         }
 
+        final int isFirstTimeLogin = SharedPrefManager.getInstance(LoginScreenActivity.this).getLoginScreenSaveAutoLoginShown();
+        if(isFirstTimeLogin == 1){
+            final String email = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
+            edtEmailAddress.setText(email);
+        }
+
+
+
     }
 
     private void setupWidgets() {
@@ -97,6 +99,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         edtPassword = (EditText)findViewById(R.id.edtLoginPassword);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         tvRegisterLink = (TextView)findViewById(R.id.tvRegister);
+        tvForgotPassword = (TextView)findViewById(R.id.tvForgotPassword);
         pdLoading = new ProgressDialog(LoginScreenActivity.this);
     }
 
@@ -118,6 +121,13 @@ public class LoginScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginScreenActivity.this,RegisterScreenActivity.class));
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginScreenActivity.this,ForgetPasswordScreenActivity.class));
             }
         });
     }
@@ -214,12 +224,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         UserInformation userInformation;
 
 
-        //    String userEmail = "";
-//    String userFname = "";
-//    String userLname = "";
-//    String userPassword = "";
-//    String userAge = "";
-//    String userPhoneNumber = "";
+
         int userID;
 
         //flag 0 means get and 1 means post.(By default it is get.)

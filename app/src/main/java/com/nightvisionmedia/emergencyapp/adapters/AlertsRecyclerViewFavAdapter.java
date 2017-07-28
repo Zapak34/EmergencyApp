@@ -55,9 +55,15 @@ public class AlertsRecyclerViewFavAdapter extends RecyclerView.Adapter<AlertsRec
 
         //this set the image of the image view based on if image link is nul empty
         if(arrayList.get(position).getAlertImageURL().isEmpty() || arrayList.get(position).getAlertImageURL().contains(" ")){
-            holder.ivAlertImage.setImageResource(R.drawable.image_notpresent);
+            holder.ivAlertImage.setImageResource(R.drawable.no_image_found);
+            holder.ivAlertImage.setVisibility(View.GONE);
+            holder.title.setTextSize(30);
+            holder.content.setTextSize(20);
         }else{
             Glide.with(context).load(arrayList.get(position).getAlertImageURL()).into(holder.ivAlertImage);
+            holder.ivAlertImage.setVisibility(View.VISIBLE);
+            holder.title.setTextSize(20);
+            holder.content.setTextSize(18);
         }
 
         holder.ivAlertImage.setOnClickListener(new View.OnClickListener() {

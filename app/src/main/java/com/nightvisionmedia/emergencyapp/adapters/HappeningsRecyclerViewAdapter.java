@@ -57,9 +57,15 @@ public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<Happenin
 
         //this set the image of the image view based on if image link is nul empty
         if(my_data.get(position).getImage_link().isEmpty() || my_data.get(position).getImage_link().contains(" ")){
-            holder.ivImage.setImageResource(R.drawable.image_notpresent);
+            holder.ivImage.setImageResource(R.drawable.no_image_found);
+            holder.ivImage.setVisibility(View.GONE);
+            holder.title.setTextSize(30);
+            holder.content.setTextSize(20);
         }else{
             Glide.with(context).load(my_data.get(position).getImage_link()).into(holder.ivImage);
+            holder.ivImage.setVisibility(View.VISIBLE);
+            holder.title.setTextSize(20);
+            holder.content.setTextSize(18);
         }
 
         String[] temp = {String.valueOf(holder.happenID)};

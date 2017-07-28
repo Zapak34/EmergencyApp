@@ -1,10 +1,14 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +27,10 @@ public class HomeScreenActivity extends AppCompatActivity {
     private TextView tvWhatsNewMarquee;
     private Button btnAdminScreen;
     private BottomNavigationView bottomNavigationView;
+    private Toolbar toolbar;
+    private int logout = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,11 +107,13 @@ public class HomeScreenActivity extends AppCompatActivity {
         tvWhatsNewMarquee = (TextView)findViewById(R.id.tvWhatsNewMarquee);
         btnAdminScreen = (Button)findViewById(R.id.btnAdminScreen);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
+//        toolbar = (Toolbar)findViewById(R.id.homeToolbar);
         BottomNavigationHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem= menu.getItem(0);
         menuItem.setChecked(true);
 
+//        toolbar.setTitle("HOME");
         //String test = SharedPrefManager.getInstance(this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
         //Message.longToast(this,test);
         tvWhatsNewMarquee.setSelected(true);
@@ -112,5 +122,24 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        logout = logout + 1;
+        if(logout == 1){
+            Message.longToast(HomeScreenActivity.this, "Press Again To Logout...");
+        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                logout = 0;
+            }
+        },4000);
+        if(logout == 2){
+            logout = 0;
+            SharedPrefManager.getInstance(HomeScreenActivity.this).saveAutomaticLogin(0);
+            finish();
+            super.onBackPressed();
+        }
+    }
 }

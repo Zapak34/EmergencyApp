@@ -12,32 +12,32 @@
         android:layout_height="match_parent"
         android:id="@+id/relLayout">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/topToolbarNormal"
-            android:id="@+id/relLayoutTopBar"
-            android:layout_alignParentTop="true">
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="MORE"
-                    android:textAlignment="center"
-                    />
-                <!--<android.support.design.widget.TabLayout-->
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/topToolbarNormal"-->
+            <!--android:id="@+id/relLayoutTopBar"-->
+            <!--android:layout_alignParentTop="true">-->
+            <!--<android.support.design.widget.AppBarLayout-->
                 <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/tabs"-->
-                <!--app:tabMode="fixed"-->
-                <!--android:background="@drawable/white_grey_border_bottom">-->
+                <!--android:layout_height="match_parent">-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:text="MORE"-->
+                    <!--android:textAlignment="center"-->
+                    <!--/>-->
+                <!--&lt;!&ndash;<android.support.design.widget.TabLayout&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/tabs"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:tabMode="fixed"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@drawable/white_grey_border_bottom">&ndash;&gt;-->
 
-                <!--</android.support.design.widget.TabLayout>-->
-            </android.support.design.widget.AppBarLayout>
-        </RelativeLayout>
+                <!--&lt;!&ndash;</android.support.design.widget.TabLayout>&ndash;&gt;-->
+            <!--</android.support.design.widget.AppBarLayout>-->
+        <!--</RelativeLayout>-->
 
 
         <RelativeLayout
