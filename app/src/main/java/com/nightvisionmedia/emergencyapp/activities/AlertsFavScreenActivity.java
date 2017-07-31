@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.nightvisionmedia.emergencyapp.R;
-import com.nightvisionmedia.emergencyapp.adapters.AlertsRecyclerViewFavAdapter;
+import com.nightvisionmedia.emergencyapp.fav_adapters.AlertsRecyclerViewFavAdapter;
 import com.nightvisionmedia.emergencyapp.sugar_models.AlertsFavorites;
 
 import java.util.List;

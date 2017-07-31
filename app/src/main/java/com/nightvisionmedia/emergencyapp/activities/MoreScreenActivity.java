@@ -58,7 +58,7 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
                         android.os.Process.killProcess(android.os.Process.myPid());
                         break;
                     case R.id.ic_need_help:
-                        Intent intent1 = new Intent(MoreScreenActivity.this, INeedHelpActivity.class);
+                        Intent intent1 = new Intent(MoreScreenActivity.this, SOSCategoriesScreenActivity.class);
                         startActivity(intent1);
                         android.os.Process.killProcess(android.os.Process.myPid());
                         break;

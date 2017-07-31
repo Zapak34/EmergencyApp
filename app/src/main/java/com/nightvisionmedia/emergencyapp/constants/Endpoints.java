@@ -15,6 +15,8 @@ public class Endpoints {
     public static final String URL_REFRESH_SERVER_TOKEN ="http://nightvisionmediaapp.000webhostapp.com/refreshToken.php";
     public static final String URL_SEND_TOKEN_TO_SERVER ="http://nightvisionmediaapp.000webhostapp.com/sendTokenToServer.php";
     public final static String URL_GET_ALERTS ="http://nightvisionmediaapp.000webhostapp.com/getAlerts.php";
+    public final static String URL_GET_SOS_INFO_LIST ="http://nightvisionmediaapp.000webhostapp.com/getSOSInformationList.php?category_id=";
+    public final static String URL_GET_SOS_CATEGORIES ="http://nightvisionmediaapp.000webhostapp.com/getSOSCategories.php";
     public final static String URL_GET_HAPPENINGS ="http://nightvisionmediaapp.000webhostapp.com/getHappenings.php";
     public final static String URL_FORGET_PASSWORD ="http://nightvisionmediaapp.000webhostapp.com/forgetPassword.php?email=";
     //URL KEYS
@@ -51,6 +53,9 @@ public class Endpoints {
     public static final String KEY_PHP_ACTION = "action";
 
     //BUNDLE KEYS
+    public static final String KEY_BUNDLE_CATEGORY_ID = "category_id";
+
+
     public static final String KEY_BUNDLE_FNAME = "USERFNAME";
     public static final String KEY_BUNDLE_LNAME = "USERLNAME";
     public static final String KEY_BUNDLE_AGE = "USERAGE";

@@ -1,10 +1,8 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.nightvisionmedia.emergencyapp.R;
-import com.nightvisionmedia.emergencyapp.constants.Endpoints;
 import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.BottomNavigationHelper;
 import com.nightvisionmedia.emergencyapp.utils.DialogHandler;
@@ -74,7 +71,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                         android.os.Process.killProcess(android.os.Process.myPid());
                         break;
                     case R.id.ic_need_help:
-                        Intent intent2 = new Intent(HomeScreenActivity.this, INeedHelpActivity.class);
+                        Intent intent2 = new Intent(HomeScreenActivity.this, SOSCategoriesScreenActivity.class);
                         startActivity(intent2);
                         android.os.Process.killProcess(android.os.Process.myPid());
                         break;

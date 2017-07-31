@@ -100,7 +100,7 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
                         App.refreshActivity(AlertsScreenActivity.this);
                         break;
                     case R.id.ic_need_help:
-                        Intent intent1 = new Intent(AlertsScreenActivity.this, INeedHelpActivity.class);
+                        Intent intent1 = new Intent(AlertsScreenActivity.this, SOSCategoriesScreenActivity.class);
                         startActivity(intent1);
                         android.os.Process.killProcess(android.os.Process.myPid());
                         break;
@@ -191,6 +191,12 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
             }
         };
         task.execute();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

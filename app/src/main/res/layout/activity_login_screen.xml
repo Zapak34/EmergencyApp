@@ -58,7 +58,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:text="Offline Mode"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvForgotPassword"
@@ -67,7 +68,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Forgot Password"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <Button

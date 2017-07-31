@@ -39,7 +39,7 @@
         <activity android:name=".activities.RegisterScreenActivity" />
         <activity android:name=".activities.HomeScreenActivity" />
         <activity android:name=".activities.AlertsScreenActivity" />
-        <activity android:name=".activities.INeedHelpActivity" />
+        <activity android:name=".activities.SOSCategoriesScreenActivity" />
         <activity android:name=".activities.HappeningsActivity" />
         <activity android:name=".activities.MoreScreenActivity" />
 
@@ -60,7 +60,9 @@
         <activity android:name=".activities.AlertsFavScreenActivity" />
         <activity android:name=".activities.SettingsScreenActivity" />
         <activity android:name=".activities.HappningsFavScreenActivity" />
-        <activity android:name=".activities.ForgetPasswordScreenActivity"></activity>
+        <activity android:name=".activities.ForgetPasswordScreenActivity" />
+        <activity android:name=".activities.LoadSOSInformationScreenActivity" />
+        <activity android:name=".activities.ShowAllSosFavoritesScreenActivity"></activity>
     </application>
 
 </manifest>

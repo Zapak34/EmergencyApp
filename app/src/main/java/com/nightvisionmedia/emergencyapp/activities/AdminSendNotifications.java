@@ -100,7 +100,7 @@ public class AdminSendNotifications extends AppCompatActivity {
                 params.put(Endpoints.KEY_PHP_TITLE,title);
                 params.put(Endpoints.KEY_PHP_MESSAGE,message);
                 params.put(Endpoints.KEY_PHP_IMAGE,image);
-                params.put(Endpoints.KEY_PHP_TYPE,"job");
+                params.put(Endpoints.KEY_PHP_TYPE,"alert");
 
                 RequestHandler rh = new RequestHandler();
                 String res = rh.sendPostRequest(Endpoints.URL_ADD_POST, params);

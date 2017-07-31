@@ -1,4 +1,4 @@
-package com.nightvisionmedia.emergencyapp.adapters;
+package com.nightvisionmedia.emergencyapp.fav_adapters;
 
 import android.content.Context;
 import android.content.Intent;
