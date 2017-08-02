@@ -19,12 +19,14 @@
 
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/alertsFavToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    ></android.support.v7.widget.Toolbar>
+                    app:titleTextAppearance="@style/Toolbar.TitleTextSmall"
+                    />
             </android.support.design.widget.AppBarLayout>
 
         </RelativeLayout>

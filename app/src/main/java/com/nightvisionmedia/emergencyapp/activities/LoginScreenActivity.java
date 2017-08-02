@@ -205,7 +205,6 @@ public class LoginScreenActivity extends AppCompatActivity {
 //            userInformation.setPassword(userPassword);
 //            userInformation.setPhoneNumber(userPhoneNumber);
 //            userInformation.save();
-
             SharedPrefManager.getInstance(LoginScreenActivity.this).saveUserDetailsOffline(userEmail,userFname,userLname,encryptedUserPassword,userAge,userPhoneNumber);
 
         } catch (JSONException e) {

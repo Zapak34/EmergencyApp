@@ -27,6 +27,7 @@
                     android:textSize="25sp"
                     android:textStyle="bold"
                     android:text="CATEGORIES"
+                    android:textColor="#FFFFFF"
                     android:textAlignment="center"
                     />
             </android.support.design.widget.AppBarLayout>

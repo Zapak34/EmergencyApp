@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.adapters.DisasterRecyclerViewAdapter;
+import com.nightvisionmedia.emergencyapp.adapters.TemporaryRecyclerViewAdapter;
 import com.nightvisionmedia.emergencyapp.constants.CategoryIDs;
 import com.nightvisionmedia.emergencyapp.constants.Endpoints;
 import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
@@ -43,7 +44,7 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
 
     //DECLARE THE ADAPTERS FOR CATEGORIES
     private DisasterRecyclerViewAdapter disasterAdapter;
-    private DisasterRecyclerViewAdapter temporaryAdapter;
+    private TemporaryRecyclerViewAdapter temporaryAdapter;
 
 
 
@@ -76,8 +77,11 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
         if(category_to_load.equals(CategoryIDs.disastersID)){
             disasterAdapter = new DisasterRecyclerViewAdapter(this,data_list);
             recyclerView.setAdapter(disasterAdapter);
+        }else  if(category_to_load.equals(CategoryIDs.temporaryID)){
+            temporaryAdapter = new TemporaryRecyclerViewAdapter(this,data_list);
+            recyclerView.setAdapter(temporaryAdapter);
         }else{
-            Message.longToast(LoadSOSInformationScreenActivity.this,"Opps!! Error occurred, could not locate category");
+            //Message.longToast(LoadSOSInformationScreenActivity.this,"Opps!! Error occurred, could not locate category");
             Message.longToast(LoadSOSInformationScreenActivity.this,"Please make sure this application is the latest version");
             finish();
         }
@@ -97,9 +101,8 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
         super.onResume();
         if(category_to_load.equals(CategoryIDs.disastersID)){
             disasterAdapter.notifyDataSetChanged();
-        }else{
-            Message.shortToast(LoadSOSInformationScreenActivity.this,"Opps!! Error occurred while refreshing data.");
-            Message.longToast(LoadSOSInformationScreenActivity.this,"Please make sure this application is the latest version");
+        }else if(category_to_load.equals(CategoryIDs.temporaryID)){
+            temporaryAdapter.notifyDataSetChanged();
         }
 
     }
@@ -149,10 +152,7 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
                 if(category_to_load.equals(CategoryIDs.disastersID)){
                     disasterAdapter.notifyDataSetChanged();
                 }else  if(category_to_load.equals(CategoryIDs.temporaryID)){
-                    disasterAdapter.notifyDataSetChanged();
-                }else{
-                    Message.shortToast(LoadSOSInformationScreenActivity.this,"Opps!! Error occurred while setting the data");
-                    Message.longToast(LoadSOSInformationScreenActivity.this,"Please make sure this application is the latest version");
+                    temporaryAdapter.notifyDataSetChanged();
                 }
                
             }
@@ -213,6 +213,8 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
 
         if(category_to_load.equals(CategoryIDs.disastersID)){
             disasterAdapter.setFilter(newList);
+        }else if(category_to_load.equals(CategoryIDs.temporaryID)){
+            temporaryAdapter.setFilter(newList);
         }
 
 
@@ -225,7 +227,7 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(LoadSOSInformationScreenActivity.this, HomeScreenActivity.class));
+        //startActivity(new Intent(LoadSOSInformationScreenActivity.this, HomeScreenActivity.class));
     }
 
 

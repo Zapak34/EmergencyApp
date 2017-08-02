@@ -8,7 +8,9 @@ public class Endpoints {
     //URLS
     public static final String LOGIN_URL = "http://nightvisionmediaapp.000webhostapp.com/login.php";
     public static final String REGISTRATION_URL = "http://nightvisionmediaapp.000webhostapp.com/registerUser.php";
+    public static final String URL_UPDATE_ACCOUNT = "http://nightvisionmediaapp.000webhostapp.com/userAccountOperations.php";
     public static final String GET_ALL_USER_INFO_URL = "http://nightvisionmediaapp.000webhostapp.com/getUserData.php?email=";
+    public static final String GET_ALL_USER_INFO_URL_1 = "http://nightvisionmediaapp.000webhostapp.com/getAllAccountInfo.php?email=";
     public static final String URL_FETCH_DEVICES = "http://nightvisionmediaapp.000webhostapp.com/getRegisteredDevices.php";
     public static final String URL_SEND_SINGLE_PUSH = "http://nightvisionmediaapp.000webhostapp.com/sendNotification.php";
     public static final String URL_ADD_POST="http://nightvisionmediaapp.000webhostapp.com/addPost.php";
@@ -19,7 +21,8 @@ public class Endpoints {
     public final static String URL_GET_SOS_CATEGORIES ="http://nightvisionmediaapp.000webhostapp.com/getSOSCategories.php";
     public final static String URL_GET_HAPPENINGS ="http://nightvisionmediaapp.000webhostapp.com/getHappenings.php";
     public final static String URL_FORGET_PASSWORD ="http://nightvisionmediaapp.000webhostapp.com/forgetPassword.php?email=";
-    //URL KEYS
+
+    //URL AND PHP KEYS
     public static final String KEY_USER_ID = "user_id";
     public static final String KEY_FIRST_NAME = "fname";
     public static final String KEY_LAST_NAME = "lname";
@@ -62,5 +65,11 @@ public class Endpoints {
     public static final String KEY_BUNDLE_EMAIL = "USEREMAIL";
     public static final String KEY_BUNDLE_PASSWORD = "USERPASSWORD";
     public static final String KEY_BUNDLE_PHONE_NUMBER = "USERPHONENUMBER";
+
+
+    //AGE RANGES
+    public static final String AGE_RANGE_1 = "18-26";
+    public static final String AGE_RANGE_2 = "26-35";
+    public static final String AGE_RANGE_3 = "36-65";
 
 }

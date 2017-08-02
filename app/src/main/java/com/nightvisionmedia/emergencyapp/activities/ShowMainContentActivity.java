@@ -19,7 +19,7 @@ public class ShowMainContentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_alerts_content);
+        setContentView(R.layout.activity_show_content);
         getActivityExtras();
         setupWidgets();
     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context="com.nightvisionmedia.emergencyapp.activities.RegisterScreenActivity">
+    tools:context="com.nightvisionmedia.emergencyapp.activities.UpdateAccountScreenActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:title="REGISTER"
+                app:title="UPDATE ACCOUNT"
                 app:titleTextAppearance="@style/Toolbar.TitleTextSmall"/>
 
         </android.support.design.widget.AppBarLayout>
@@ -86,6 +86,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="First Name"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
                     <EditText
                         android:id="@+id/edtFirstName"
                         android:layout_width="match_parent"
@@ -96,6 +103,17 @@
                         android:inputType="textPersonName"
                         android:textAlignment="center"
                         android:textStyle="italic" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Last Name"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/edtLastName"
@@ -146,16 +164,40 @@
                             android:text="36-65" />
                     </RadioGroup>
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email Address"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
                     <EditText
                         android:id="@+id/edtEmailAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
+                        android:editable="false"
                         android:ems="10"
+                        android:enabled="false"
                         android:hint="Email Address"
                         android:inputType="textEmailAddress"
                         android:textAlignment="center"
                         android:textStyle="italic" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Password"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/edtPassword"
@@ -168,6 +210,17 @@
                         android:textAlignment="center"
                         android:textStyle="italic" />
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Confirm Password"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
                     <EditText
                         android:id="@+id/edtConfirmPassword"
                         android:layout_width="match_parent"
@@ -178,6 +231,17 @@
                         android:inputType="textPassword"
                         android:textAlignment="center"
                         android:textStyle="italic" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phone Number"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/edtPhoneNumber"
@@ -190,13 +254,17 @@
                         android:textAlignment="center"
                         android:textStyle="italic" />
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
                     <Button
-                        android:id="@+id/btnRegister"
+                        android:id="@+id/btnUpdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:layout_marginTop="15dp"
-                        android:text="REGISTER" />
+                        android:text="UPDATE" />
                 </LinearLayout>
             </ScrollView>
 

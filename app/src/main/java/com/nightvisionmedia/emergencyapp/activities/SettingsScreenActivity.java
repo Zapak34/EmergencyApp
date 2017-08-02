@@ -1,10 +1,14 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.utils.App;
@@ -13,6 +17,9 @@ import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 public class SettingsScreenActivity extends AppCompatActivity {
     private CheckBox chkBoxAutomaticLogin;
+    private TextView tvUpdateAccountInfo;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +54,18 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
+
+        tvUpdateAccountInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingsScreenActivity.this, UpdateAccountScreenActivity.class));
+            }
+        });
+
     }
 
     private void setupWidgets() {
         chkBoxAutomaticLogin = (CheckBox)findViewById(R.id.chkBoxAutomaticLogin);
+        tvUpdateAccountInfo = (TextView)findViewById(R.id.tvUpdateUserInfo);
     }
 }

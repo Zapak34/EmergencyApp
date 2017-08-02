@@ -25,6 +25,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:ellipsize="marquee"
                 android:textSize="30sp"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold" />
             <!--<android.support.design.widget.TabLayout-->
             <!--android:layout_width="match_parent"-->
