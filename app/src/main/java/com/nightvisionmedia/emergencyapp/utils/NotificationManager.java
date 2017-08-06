@@ -57,11 +57,16 @@ public class NotificationManager {
 //                .replace("[dob]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_DOB_KEY)).replace("[age]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_AGE_KEY))
 //                .replace("[address]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_ADDRESS_KEY).replace("_"," ")).replace("[email]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_EMAIL_KEY));
 
+//        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
+//        intent1.putExtra("NOTIFY_ID",m);
+//        intent1.putExtra("title",title.replace("~","'"));
+//        intent1.putExtra("content",newContent);
+//        intent1.putExtra("image_url",url.replace("~","'"));
         Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
         intent1.putExtra("NOTIFY_ID",m);
-        intent1.putExtra("title",title.replace("~","'"));
+        intent1.putExtra("title",title);
         intent1.putExtra("content",newContent);
-        intent1.putExtra("image_url",url.replace("~","'"));
+        intent1.putExtra("image_url",url);
         intent1.putExtra("isNotification",true);
         //intent1.putExtra("isSmall",false);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(mCtx.getApplicationContext());
@@ -79,7 +84,8 @@ public class NotificationManager {
         mBuilder.setSmallIcon(R.drawable.ic_alert_35dp).setTicker(title).setWhen(0)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
-                .setContentTitle(title.replace("~","'"))
+//                .setContentTitle(title.replace("~","'"))
+                .setContentTitle(title)
                 .setStyle(bigPictureStyle)
                 .setSmallIcon(R.drawable.ic_sos_warning_35dp)
                 .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.ic_sos_warning_35dp))
@@ -106,9 +112,14 @@ public class NotificationManager {
                 .replace("[dob]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_DOB_KEY)).replace("[age]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_AGE_KEY))
                 .replace("[address]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_ADDRESS_KEY).replace("_"," ")).replace("[email]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_EMAIL_KEY));*/
 
+//        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
+//        intent1.putExtra("NOTIFY_ID",m);
+//        intent1.putExtra("title",title.replace("~","'"));
+//        intent1.putExtra("content",newContent);
+//        intent1.putExtra("isNotification",true);
         Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
         intent1.putExtra("NOTIFY_ID",m);
-        intent1.putExtra("title",title.replace("~","'"));
+        intent1.putExtra("title",title);
         intent1.putExtra("content",newContent);
         intent1.putExtra("isNotification",true);
         //intent1.putExtra("isSmall",true);

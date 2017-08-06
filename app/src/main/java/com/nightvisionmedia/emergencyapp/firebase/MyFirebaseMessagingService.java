@@ -56,7 +56,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String notifyType = data.getString("type");
 
 
-            if(notifyType.equals("job")){
+            if(notifyType.equals("alert")){
                 //creating MyNotificationManager object
                 NotificationManager mNotificationManager = new NotificationManager(getApplicationContext());
 
@@ -64,7 +64,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //            Intent intent = new Intent(getApplicationContext(), YuteTalkZone.class);
 
                 //if there is no image
-                if(imageUrl.equals("null")){
+                if(imageUrl.equals("null") || imageUrl.equals("")){
                     //displaying small notification
                     mNotificationManager.alertsSmallNotification(title, message);
                 }else{

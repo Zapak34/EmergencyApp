@@ -88,6 +88,7 @@
 
                     <EditText
                         android:id="@+id/edtFirstName"
+                        style="@style/editText_Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -99,6 +100,7 @@
 
                     <EditText
                         android:id="@+id/edtLastName"
+                        style="@style/editText_Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -148,6 +150,7 @@
 
                     <EditText
                         android:id="@+id/edtEmailAddress"
+                        style="@style/editText_Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -159,6 +162,7 @@
 
                     <EditText
                         android:id="@+id/edtPassword"
+                        style="@style/editText_Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -170,6 +174,7 @@
 
                     <EditText
                         android:id="@+id/edtConfirmPassword"
+                        style="@style/editText_Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -181,6 +186,7 @@
 
                     <EditText
                         android:id="@+id/edtPhoneNumber"
+                        style="@style/editText_Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -192,11 +198,13 @@
 
                     <Button
                         android:id="@+id/btnRegister"
+                        style="@style/loginBtn_Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:layout_marginTop="15dp"
-                        android:text="REGISTER" />
+                        android:text="REGISTER"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </ScrollView>
 

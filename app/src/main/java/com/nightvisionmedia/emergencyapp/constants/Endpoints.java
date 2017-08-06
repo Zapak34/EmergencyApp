@@ -13,6 +13,7 @@ public class Endpoints {
     public static final String GET_ALL_USER_INFO_URL_1 = "http://nightvisionmediaapp.000webhostapp.com/getAllAccountInfo.php?email=";
     public static final String URL_FETCH_DEVICES = "http://nightvisionmediaapp.000webhostapp.com/getRegisteredDevices.php";
     public static final String URL_SEND_SINGLE_PUSH = "http://nightvisionmediaapp.000webhostapp.com/sendNotification.php";
+    public static final String URL_SEND_TO_ALL_DEVICES = "http://nightvisionmediaapp.000webhostapp.com/sendNotificationToAll.php";
     public static final String URL_ADD_POST="http://nightvisionmediaapp.000webhostapp.com/addPost.php";
     public static final String URL_REFRESH_SERVER_TOKEN ="http://nightvisionmediaapp.000webhostapp.com/refreshToken.php";
     public static final String URL_SEND_TOKEN_TO_SERVER ="http://nightvisionmediaapp.000webhostapp.com/sendTokenToServer.php";

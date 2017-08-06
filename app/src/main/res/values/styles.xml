@@ -20,6 +20,12 @@
     
     <style name="editText_Style">
         <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/edittext_background</item>
+    </style>
+
+    <style name="loginBtn_Style">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_background</item>
     </style>
 
 </resources>

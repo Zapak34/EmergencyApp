@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -52,24 +51,16 @@ public class AdminSendNotifications extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i = 0; i < devices.size(); i++){
-                    sendSinglePush(devices.get(i));
-                    if(i == 0){
-                        showSent = 0;
-                        showSent1 = 0;
-                        addJob();
-                    }
-                }
+                sendToAllPush();
+                addJob();
             }
         });
     }
 
     private void addJob(){
-
-
-        final String title = edtTitle.getText().toString().trim().replace("'","~");
-        final String message = edtMessage.getText().toString().trim().replace("'","~");
-        final String image = edtImageURL.getText().toString().trim().replace("'","~");
+        final String title = edtTitle.getText().toString();
+        final String message = edtMessage.getText().toString();
+        final String image = edtImageURL.getText().toString();
         //TODO OMAR CHANGES
 //        final String emails = email;
 
@@ -170,20 +161,64 @@ public class AdminSendNotifications extends AppCompatActivity {
         MyVolley.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private void sendSinglePush(String emails) {
+    //TODO
+//    private void sendSinglePush(String emails) {
+//        final String title = edtTitle.getText().toString();
+//        final String message = edtMessage.getText().toString();
+//        final String image = edtImageURL.getText().toString();
+//        final String email = emails;
+//        progressDialog.setMessage("Sending Alerts Notifications...");
+//        progressDialog.show();
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.URL_SEND_SINGLE_PUSH,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        progressDialog.dismiss();
+//                        //Message.longToast(AdminSendNotifications.this,response);
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        progressDialog.dismiss();
+//                        Message.longToast(AdminSendNotifications.this,error.toString());
+//                    }
+//                }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("title", title);
+//                params.put("message", message);
+//
+//
+//                if (!TextUtils.isEmpty(image))
+//                    params.put("image", image);
+//
+//                params.put("email", email);
+//                params.put("type","alert");
+//                return params;
+//            }
+//        };
+//
+//        MyVolley.getInstance(this).addToRequestQueue(stringRequest);
+//    }
+
+
+
+    private void sendToAllPush() {
         final String title = edtTitle.getText().toString();
         final String message = edtMessage.getText().toString();
         final String image = edtImageURL.getText().toString();
-        final String email = emails;
-        progressDialog.setMessage("Sending Push");
+        progressDialog.setMessage("Sending Alerts Notifications...");
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.URL_SEND_SINGLE_PUSH,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.URL_SEND_TO_ALL_DEVICES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        //Message.longToast(AdminSendNotifications.this,response);
+                        Message.longToast(AdminSendNotifications.this,response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -200,11 +235,12 @@ public class AdminSendNotifications extends AppCompatActivity {
                 params.put("message", message);
 
 
-                if (!TextUtils.isEmpty(image))
+                if (!TextUtils.isEmpty(image)){
                     params.put("image", image);
+                }
 
-                params.put("email", email);
-                params.put("type","job");
+
+                params.put("type","alert");
                 return params;
             }
         };

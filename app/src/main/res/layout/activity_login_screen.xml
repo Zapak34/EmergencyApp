@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="190dp"
         android:layout_alignParentTop="true"
         app:srcCompat="@drawable/app_logo" />
 
@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email Address"
+            style="@style/editText_Style"
             android:inputType="textEmailAddress"
             android:textAlignment="center"
             android:textStyle="italic" />
@@ -44,6 +45,7 @@
             android:ems="10"
             android:hint="*******"
             android:inputType="textPassword"
+            style="@style/editText_Style"
             android:textAlignment="center" />
 
         <LinearLayout
@@ -77,14 +79,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            style="@style/loginBtn_Style"
+            android:textColor="@android:color/white"
             android:text="LOGIN" />
 
         <TextView
             android:id="@+id/tvRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:clickable="true"
-            android:text="Register"
+            android:text="Create An Account"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@android:color/darker_gray"
