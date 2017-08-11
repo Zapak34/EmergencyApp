@@ -1,8 +1,5 @@
 package com.nightvisionmedia.emergencyapp.utils;
 
-/**
- * Created by Lennis on 1/2/2017.
- */
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -17,13 +14,14 @@ public class SharedPrefManager {
     private static final String APP_FIRST_START = "app_first_start";
 
     public static final String USER_EMAIL_KEY = "user_email";
-    private static final String USER_FNAME_KEY = "user_fname";
+    public static final String USER_FNAME_KEY = "user_fname";
     public static final String USER_PASSWORD_KEY = "user_password";
-    private static final String USER_LNAME_KEY = "user_lname";
-    private static final String USER_AGE_KEY = "user_age";
+    public static final String USER_LNAME_KEY = "user_lname";
+    public static final String USER_AGE_KEY = "user_age";
     private static final String USER_PHONE_KEY = "user_home_phone";
     public static final String USER_AUTO_LOGIN_KEY = "auto_login";
     private static final String USER_AUTO_LOGIN_SHOWN_FOR_FIRST_TIME = "auto_login_shown";
+    public static final String USER_OFFLINE_MODE_STATUS = "offline_mode";
 //    public static final String USER_UNENCRYPTED_PASSWORD = "unencrypted_password";
 
 
@@ -90,6 +88,19 @@ public class SharedPrefManager {
     public boolean checkUserDataSavedOffline(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(USER_SAVED_OFFLINE_KEY,DEFAULT_IS_SAVED);
+    }
+
+    public boolean getOfflineMode(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(USER_OFFLINE_MODE_STATUS,DEFAULT_IS_SAVED);
+    }
+
+    public void setOfflineMode(boolean value){
+        SharedPreferences sharedPreferences;
+        sharedPreferences = mCtx.getSharedPreferences(USER_OFFLINE_DETIALS, Context.MODE_PRIVATE);
+        Editor editor = sharedPreferences.edit();
+        editor.putBoolean(USER_OFFLINE_MODE_STATUS,value);
+        editor.apply();
     }
 
     public void saveAutomaticLogin(int isSaved){

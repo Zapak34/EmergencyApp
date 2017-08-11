@@ -1,9 +1,5 @@
 package com.nightvisionmedia.emergencyapp.utils;
 
-/**
- * Created by Lennis on 1/2/2017.
- */
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -27,21 +23,7 @@ import java.util.Date;
 
 public class NotificationManager {
 
-    public static final int ID_BIG_NOTIFICATION = 234;
-    public static final int ID_SMALL_NOTIFICATION = 235;
-
     private Context mCtx;
-    private static final String USER_EMAIL_KEY = "user_email";
-    private static final String USER_FNAME_KEY = "user_fname";
-    private static final String USER_PASSWORD_KEY = "user_password";
-    private static final String USER_PARISH_KEY = "user_parish";
-    private static final String USER_MNAME_KEY = "user_mname";
-    private static final String USER_LNAME_KEY = "user_lname";
-    private static final String USER_DOB_KEY = "user_dob";
-    private static final String USER_AGE_KEY = "user_age";
-    private static final String USER_CELL_KEY = "user_cell_phone";
-    private static final String USER_TELE_KEY = "user_home_phone";
-    private static final String USER_ADDRESS_KEY = "user_address";
     public NotificationManager(Context mCtx) {
         this.mCtx = mCtx;
     }
@@ -51,20 +33,19 @@ public class NotificationManager {
     //when you will tap on the notification
     public void alertsBigNotification(String title, String content, String url) {
         int m = (int)((new Date().getTime()/1000L) % Integer.MAX_VALUE);
-        String newContent = content.replace("~","'");
-//        String newContent = message.replace("[fname]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_FNAME_KEY))
-//                .replace("[mname]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_MNAME_KEY)).replace("[lname]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_LNAME_KEY))
-//                .replace("[dob]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_DOB_KEY)).replace("[age]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_AGE_KEY))
-//                .replace("[address]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_ADDRESS_KEY).replace("_"," ")).replace("[email]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_EMAIL_KEY));
+        String newContent = content.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
 
-//        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
-//        intent1.putExtra("NOTIFY_ID",m);
-//        intent1.putExtra("title",title.replace("~","'"));
-//        intent1.putExtra("content",newContent);
-//        intent1.putExtra("image_url",url.replace("~","'"));
+        String newTitle = title.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+
         Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
         intent1.putExtra("NOTIFY_ID",m);
-        intent1.putExtra("title",title);
+        intent1.putExtra("title",newTitle);
         intent1.putExtra("content",newContent);
         intent1.putExtra("image_url",url);
         intent1.putExtra("isNotification",true);
@@ -76,16 +57,15 @@ public class NotificationManager {
         PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(m, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
-        bigPictureStyle.setBigContentTitle(title);
+        bigPictureStyle.setBigContentTitle(newTitle);
         bigPictureStyle.setSummaryText(Html.fromHtml(content).toString());
         bigPictureStyle.bigPicture(getBitmapFromURL(url));
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
 
-        mBuilder.setSmallIcon(R.drawable.ic_alert_35dp).setTicker(title).setWhen(0)
+        mBuilder.setSmallIcon(R.drawable.ic_alert_35dp).setTicker(newTitle).setWhen(0)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
-//                .setContentTitle(title.replace("~","'"))
-                .setContentTitle(title)
+                .setContentTitle(newTitle)
                 .setStyle(bigPictureStyle)
                 .setSmallIcon(R.drawable.ic_sos_warning_35dp)
                 .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.ic_sos_warning_35dp))
@@ -106,20 +86,20 @@ public class NotificationManager {
     //when you will tap on the notification
     public void alertsSmallNotification(String title, String content) {
         int m = (int)((new Date().getTime()/1000L) % Integer.MAX_VALUE);
-        String newContent = content.replace("~","'");
-        /*String newContent = message.replace("[fname]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_FNAME_KEY))
-                .replace("[mname]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_MNAME_KEY)).replace("[lname]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_LNAME_KEY))
-                .replace("[dob]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_DOB_KEY)).replace("[age]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_AGE_KEY))
-                .replace("[address]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_ADDRESS_KEY).replace("_"," ")).replace("[email]",SharedPrefManager.getInstance(mCtx).appGetUserSaveData(USER_EMAIL_KEY));*/
+        String newContent = content.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
 
-//        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
-//        intent1.putExtra("NOTIFY_ID",m);
-//        intent1.putExtra("title",title.replace("~","'"));
-//        intent1.putExtra("content",newContent);
-//        intent1.putExtra("isNotification",true);
+        String newTitle = title.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+
+
         Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
         intent1.putExtra("NOTIFY_ID",m);
-        intent1.putExtra("title",title);
+        intent1.putExtra("title",newTitle);
         intent1.putExtra("content",newContent);
         intent1.putExtra("isNotification",true);
         //intent1.putExtra("isSmall",true);
@@ -133,13 +113,119 @@ public class NotificationManager {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
 //        Notification notification;
         mBuilder.setSmallIcon(R.drawable.ic_alert_35dp)
-                .setTicker(title)
+                .setTicker(newTitle)
                 .setWhen(0)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
-                .setContentTitle(title)
+                .setContentTitle(newTitle)
                 .setSmallIcon(R.drawable.ic_sos_warning_35dp)
                 .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.ic_sos_warning_35dp))
+                .setContentText(newContent)
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setVibrate(new long[] {100, 1500, 500, 1500});
+
+
+        Notification notification = mBuilder.build();
+
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        android.app.NotificationManager notificationManager = (android.app.NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(m, notification);
+    }
+
+
+
+    //the method will show a big notification with an image
+    //parameters are title for message title, message for message text, url of the big image and an intent that will open
+    //when you will tap on the notification
+    public void happeningsBigNotification(String title, String content, String url) {
+        int m = (int)((new Date().getTime()/1000L) % Integer.MAX_VALUE);
+        String newContent = content.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+
+        String newTitle = title.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+
+        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
+        intent1.putExtra("NOTIFY_ID",m);
+        intent1.putExtra("title",newTitle);
+        intent1.putExtra("content",newContent);
+        intent1.putExtra("image_url",url);
+        intent1.putExtra("isNotification",true);
+        //intent1.putExtra("isSmall",false);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(mCtx.getApplicationContext());
+        taskStackBuilder.addParentStack(HomeScreenActivity.class);
+        taskStackBuilder.addNextIntent(intent1);
+
+        PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(m, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
+        bigPictureStyle.setBigContentTitle(newTitle);
+        bigPictureStyle.setSummaryText(Html.fromHtml(content).toString());
+        bigPictureStyle.bigPicture(getBitmapFromURL(url));
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
+
+        mBuilder.setSmallIcon(R.drawable.ic_happenings_35dp).setTicker(newTitle).setWhen(0)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setContentTitle(newTitle)
+                .setStyle(bigPictureStyle)
+                .setSmallIcon(R.drawable.ic_happenings_35dp)
+                .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.ic_happenings_35dp))
+                .setContentText(newContent)
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setVibrate(new long[] {100, 1500, 500, 1500});
+
+        Notification notification = mBuilder.build();
+
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        android.app.NotificationManager notificationManager = (android.app.NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(m, notification);
+    }
+
+    //the method will show a small notification
+    //parameters are title for message title, message for message text and an intent that will open
+    //when you will tap on the notification
+    public void happeningsSmallNotification(String title, String content) {
+        int m = (int)((new Date().getTime()/1000L) % Integer.MAX_VALUE);
+        String newContent = content.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+
+        String newTitle = title.replace("[fname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(mCtx).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+
+
+        Intent intent1 =  new Intent(mCtx,ShowMainContentActivity.class);
+        intent1.putExtra("NOTIFY_ID",m);
+        intent1.putExtra("title",newTitle);
+        intent1.putExtra("content",newContent);
+        intent1.putExtra("isNotification",true);
+        //intent1.putExtra("isSmall",true);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(mCtx.getApplicationContext());
+        taskStackBuilder.addParentStack(HomeScreenActivity.class);
+        taskStackBuilder.addNextIntent(intent1);
+
+        PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(m, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
+//        Notification notification;
+        mBuilder.setSmallIcon(R.drawable.ic_happenings_35dp)
+                .setTicker(newTitle)
+                .setWhen(0)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setContentTitle(newTitle)
+                .setSmallIcon(R.drawable.ic_happenings_35dp)
+                .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.ic_happenings_35dp))
                 .setContentText(newContent)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setVibrate(new long[] {100, 1500, 500, 1500});

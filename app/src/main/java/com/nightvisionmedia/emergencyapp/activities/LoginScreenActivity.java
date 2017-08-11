@@ -3,11 +3,15 @@ package com.nightvisionmedia.emergencyapp.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -41,21 +45,13 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 public class LoginScreenActivity extends AppCompatActivity {
-    public static final int CONNECTION_TIMEOUT=22000;
-    public static final int READ_TIMEOUT=20000;
     private ProgressDialog pdLoading;
-    EditText edtEmailAddress;
-    EditText edtPassword;
-    Button btnLogin;
-    TextView tvRegisterLink, tvForgotPassword;
-
-    UserInformation userInformation;
-        String userEmail = "";
-    String userFname = "";
-    String userLname = "";
-    String userPassword = "";
-    String userAge = "";
-    String userPhoneNumber = "";
+    private EditText edtEmailAddress;
+    private EditText edtPassword;
+    private Button btnLogin;
+    private TextView tvRegisterLink, tvForgotPassword;
+    private CheckBox chkBoxOfflineMode;
+    private boolean hasInternet;
 
 
 
@@ -65,6 +61,15 @@ public class LoginScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
         setupWidgets();
         setupListeners();
+        hasInternet = isNetworkAvailable();
+        if(!hasInternet){
+            showErrorMessage("There is no internet connection available...");
+            //Message.longToast(LoginScreenActivity.this, "There is no internet connection...");
+        }
+
+        if(SharedPrefManager.getInstance(LoginScreenActivity.this).getOfflineMode()){
+            Message.shortToast(LoginScreenActivity.this,"Offline Mode is On..");
+        }
 
         //Message.longToast(LoginScreenActivity.this,"DEVICE TOKEN FROM LOGIN SCREEN: "+ SharedPrefManager.getInstance(LoginScreenActivity.this).getDeviceToken());
         final String fcm_token = SharedPrefManager.getInstance(LoginScreenActivity.this).getDeviceToken();
@@ -78,10 +83,17 @@ public class LoginScreenActivity extends AppCompatActivity {
 
         final int isAutoLogin = SharedPrefManager.getInstance(LoginScreenActivity.this).getAutomaticLogin();
         if(isAutoLogin == 1){
-            final String email = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
-            final String password = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY);
-            new LoginAsync1().execute(email,password);
+            final String localEmail = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
+            final String localPassword = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY);
 
+            if(!hasInternet && SharedPrefManager.getInstance(LoginScreenActivity.this).getOfflineMode()) {
+                    startActivity(new Intent(LoginScreenActivity.this, HomeScreenActivity.class));
+                    Message.shortToast(LoginScreenActivity.this,"Login Successful..");
+            }else if(hasInternet){
+                new LoginAsync1().execute(localEmail,localPassword);
+            }else{
+                showErrorMessage("There is no internet connection available, we would recommend you go in offline mode for you local information...");
+            }
         }
 
         final int isFirstTimeLogin = SharedPrefManager.getInstance(LoginScreenActivity.this).getLoginScreenSaveAutoLoginShown();
@@ -94,13 +106,23 @@ public class LoginScreenActivity extends AppCompatActivity {
 
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
     private void setupWidgets() {
         edtEmailAddress = (EditText)findViewById(R.id.edtLoginEmailAddress);
         edtPassword = (EditText)findViewById(R.id.edtLoginPassword);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         tvRegisterLink = (TextView)findViewById(R.id.tvRegister);
         tvForgotPassword = (TextView)findViewById(R.id.tvForgotPassword);
+        chkBoxOfflineMode = (CheckBox)findViewById(R.id.chkBoxOfflineMode);
         pdLoading = new ProgressDialog(LoginScreenActivity.this);
+        chkBoxOfflineMode.setChecked(SharedPrefManager.getInstance(LoginScreenActivity.this).getOfflineMode());
     }
 
     private void setupListeners() {
@@ -112,9 +134,23 @@ public class LoginScreenActivity extends AppCompatActivity {
                 boolean isValid = checkUserInfo(email,password);
                 if(isValid){
                     //getUserData(email,password);
-                     new LoginAsync1().execute(email,password);
-                }
+                    boolean hasInternet = isNetworkAvailable();
+                    if(hasInternet && !SharedPrefManager.getInstance(LoginScreenActivity.this).getOfflineMode()){
+                        new LoginAsync1().execute(email,password);
+                    }else if(SharedPrefManager.getInstance(LoginScreenActivity.this).getOfflineMode()){
+                        String localEmail = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY);
+                        String localPassword = SharedPrefManager.getInstance(LoginScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY);
+                        if(localEmail.equals(email) && localPassword.equals(password)){
+                            startActivity(new Intent(LoginScreenActivity.this, HomeScreenActivity.class));
+                            Message.shortToast(LoginScreenActivity.this,"Login Successful..");
+                        }else{
+                            showErrorMessage("This is not the account on this device...");
+                        }
+                    }else{
+                        showErrorMessage("There is no internet connection available, we would recommend you go in offline mode for you local information...");
+                    }
 
+                }
             }
         });
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +164,21 @@ public class LoginScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginScreenActivity.this,ForgetPasswordScreenActivity.class));
+            }
+        });
+
+        chkBoxOfflineMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(chkBoxOfflineMode.isChecked()){
+                    SharedPrefManager.getInstance(LoginScreenActivity.this).setOfflineMode(true);
+                    Message.shortToast(LoginScreenActivity.this,"Offline Mode Is Turned On...");
+                    chkBoxOfflineMode.setText("Offline Mode (ON)");
+                }else{
+                    SharedPrefManager.getInstance(LoginScreenActivity.this).setOfflineMode(false);
+                    Message.shortToast(LoginScreenActivity.this,"Offline Mode Is Turned Off...");
+                    chkBoxOfflineMode.setText("Offline Mode");
+                }
             }
         });
     }
@@ -174,7 +225,8 @@ public class LoginScreenActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Message.longToast(LoginScreenActivity.this, "ERROR FROM GET USER DATA: "+error.toString());
+                        showErrorMessage("ERROR FROM GET USER DATA: "+error.toString());
+                        //Message.longToast(LoginScreenActivity.this, "ERROR FROM GET USER DATA: "+error.toString());
                     }
                 });
 
@@ -197,14 +249,6 @@ public class LoginScreenActivity extends AppCompatActivity {
             final String userAge = collegeData.getString(Endpoints.KEY_DB_AGE);
             final String userPhoneNumber = collegeData.getString(Endpoints.KEY_DB_PHONE_NUMBER);
 
-//            userInformation = new UserInformation();
-//            userInformation.setFirstName(userFname);
-//            userInformation.setLastName(userLname);
-//            //userInformation.setAge(userAge);
-//            userInformation.setEmail(userEmail);
-//            userInformation.setPassword(userPassword);
-//            userInformation.setPhoneNumber(userPhoneNumber);
-//            userInformation.save();
             SharedPrefManager.getInstance(LoginScreenActivity.this).saveUserDetailsOffline(userEmail,userFname,userLname,encryptedUserPassword,userAge,userPhoneNumber);
 
         } catch (JSONException e) {

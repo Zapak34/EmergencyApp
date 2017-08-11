@@ -74,43 +74,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }
 
 
-            }/*else if(notifyType.equals("reminder")){
-
-
+            }else if(notifyType.equals("happenings")){
                 //creating MyNotificationManager object
-                MyNotificationManager mNotificationManager = new MyNotificationManager(getApplicationContext());
+                NotificationManager mNotificationManager = new NotificationManager(getApplicationContext());
 
                 //creating an intent for the notification
 //            Intent intent = new Intent(getApplicationContext(), YuteTalkZone.class);
 
                 //if there is no image
-                if(imageUrl.equals("null")){
+                if(imageUrl.equals("null") || imageUrl.equals("")){
                     //displaying small notification
-                    mNotificationManager.reminderSmallNotification(title, message);
+                    mNotificationManager.happeningsSmallNotification(title, message);
                 }else{
                     //if there is an image
                     //displaying a big notification
-                    mNotificationManager.reminderBigNotification(title, message, imageUrl);
+                    mNotificationManager.happeningsBigNotification(title, message,imageUrl);
                 }
 
 
-            }else if(notifyType.equals("alert")){
-                //creating MyNotificationManager object
-                MyNotificationManager mNotificationManager = new MyNotificationManager(getApplicationContext());
-
-                //creating an intent for the notification
-//            Intent intent = new Intent(getApplicationContext(), YuteTalkZone.class);
-
-                //if there is no image
-                if(imageUrl.equals("null")){
-                    //displaying small notification
-                    mNotificationManager.alertsSmallNotification(title, message);
-                }else{
-                    //if there is an image
-                    //displaying a big notification
-                    mNotificationManager.alertsBigNotification(title, message, imageUrl);
-                }
-            }*/
+            }
 
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());

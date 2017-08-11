@@ -13,9 +13,8 @@ import com.bumptech.glide.Glide;
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.activities.ShowMainContentActivity;
 import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
-import com.nightvisionmedia.emergencyapp.sugar_models.HappeningsFavorites;
+import com.nightvisionmedia.emergencyapp.sugar_models.HouseholdFavorites;
 import com.nightvisionmedia.emergencyapp.utils.Message;
-import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +23,12 @@ import java.util.List;
  * Created by Omar (GAZAMAN) Myers on 6/29/2017.
  */
 
-public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<HappeningsRecyclerViewAdapter.ViewHolder>{
+public class HouseholdRecyclerViewAdapter extends RecyclerView.Adapter<HouseholdRecyclerViewAdapter.ViewHolder>{
     private Context context;
     private List<MainRecyclerViewRowClass> my_data;
 
 
-    public HappeningsRecyclerViewAdapter(Context context, List<MainRecyclerViewRowClass> my_data) {
+    public HouseholdRecyclerViewAdapter(Context context, List<MainRecyclerViewRowClass> my_data) {
         this.context = context;
         this.my_data = my_data;
     }
@@ -45,16 +44,9 @@ public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<Happenin
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         //this sets the text of the text view to its respective data
-        holder.happenID = my_data.get(position).getId();
-        holder.title.setText(my_data.get(position).getTitle().replace("[fname]", SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
-                .replace("[lname]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
-                .replace("[age]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_AGE_KEY))
-                .replace("[email]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_EMAIL_KEY)));
-        
-        holder.content.setText(my_data.get(position).getContent().replace("[fname]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
-                .replace("[lname]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
-                .replace("[age]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_AGE_KEY))
-                .replace("[email]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_EMAIL_KEY)));
+        holder.householdID = my_data.get(position).getId();
+        holder.title.setText(my_data.get(position).getTitle());
+        holder.content.setText(my_data.get(position).getContent());
         holder.time_posted.setText(my_data.get(position).getTime_posted());
         holder.image_url = my_data.get(position).getImage_link();
 
@@ -76,8 +68,8 @@ public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<Happenin
             holder.content.setTextSize(18);
         }
 
-        String[] temp = {String.valueOf(holder.happenID)};
-        holder.count =  HappeningsFavorites.count(HappeningsFavorites.class, "happen_id = ?",temp);
+        String[] temp = {String.valueOf(holder.householdID)};
+        holder.count =  HouseholdFavorites.count(HouseholdFavorites.class, "household_id = ?",temp);
         if(holder.count > 0){
             holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
         }else{
@@ -120,18 +112,18 @@ public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<Happenin
         holder.ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] temp = {String.valueOf(holder.happenID)};
-                long countTemp =  HappeningsFavorites.count(HappeningsFavorites.class, "happen_id = ?",temp);
+                String[] temp = {String.valueOf(holder.householdID)};
+                long countTemp =  HouseholdFavorites.count(HouseholdFavorites.class, "household_id = ?",temp);
                     if(holder.count == 0)
                     {
                         //querying list return empty, there is no record found matching the query.
-                        HappeningsFavorites happeningsFavorites = new HappeningsFavorites();
-                        happeningsFavorites.setHappenID(holder.happenID);
-                        happeningsFavorites.setHappenTitle(holder.title.getText().toString());
-                        happeningsFavorites.setHappenContent(holder.content.getText().toString());
-                        happeningsFavorites.setHappenImageURL(holder.image_url);
-                        happeningsFavorites.setHappenPostedTime(holder.time_posted.getText().toString());
-                        happeningsFavorites.save();
+                        HouseholdFavorites householdFavorites = new HouseholdFavorites();
+                        householdFavorites.setHouseholdID(holder.householdID);
+                        householdFavorites.setHouseholdTitle(holder.title.getText().toString());
+                        householdFavorites.setHouseholdContent(holder.content.getText().toString());
+                        householdFavorites.setHouseholdImageURL(holder.image_url);
+                        householdFavorites.setHouseholdPostedTime(holder.time_posted.getText().toString());
+                        householdFavorites.save();
 
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
                         Message.longToast(context, "Favorite Saved...");
@@ -141,7 +133,7 @@ public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<Happenin
                     {
 
                         //there are records matching your query.
-                        HappeningsFavorites.deleteAll(HappeningsFavorites.class, "happen_id = ?", String.valueOf(holder.happenID));
+                        HouseholdFavorites.deleteAll(HouseholdFavorites.class, "household_id = ?", String.valueOf(holder.householdID));
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
                         Message.longToast(context, "Favorite Removed...");
                     }
@@ -158,7 +150,7 @@ public class HappeningsRecyclerViewAdapter extends RecyclerView.Adapter<Happenin
 
     //this class gets the each widget on the template for reference to give it the respective data
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public int happenID;
+        public int householdID;
         public TextView content, title, time_posted;
         public ImageView ivImage, ivFavorite;
         public String image_url;

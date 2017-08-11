@@ -21,6 +21,7 @@ import com.nightvisionmedia.emergencyapp.adapters.AlertsRecyclerViewAdapter;
 import com.nightvisionmedia.emergencyapp.adapters.SOSCategoriesRecyclerViewAdapter;
 import com.nightvisionmedia.emergencyapp.constants.Endpoints;
 import com.nightvisionmedia.emergencyapp.custom_models.SOSTitleRecyclerViewRowClass;
+import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.BottomNavigationHelper;
 import com.nightvisionmedia.emergencyapp.utils.Message;
 
@@ -54,7 +55,7 @@ public class SOSCategoriesScreenActivity extends AppCompatActivity {
         data_list = new ArrayList<>();
         boolean hasInternet = isNetworkAvailable();
         if(!hasInternet){
-            Message.longToast(SOSCategoriesScreenActivity.this, "There is no internet connection...");
+            Message.longToast(SOSCategoriesScreenActivity.this, "There is no internet connection, you can go to offline mode from settings...");
         }else {
             load_data_from_server();
         }
@@ -93,6 +94,7 @@ public class SOSCategoriesScreenActivity extends AppCompatActivity {
                         android.os.Process.killProcess(android.os.Process.myPid());
                         break;
                     case R.id.ic_need_help:
+                        App.refreshActivity(SOSCategoriesScreenActivity.this);
                         break;
                     case R.id.ic_happenings:
                         Intent intent1 = new Intent(SOSCategoriesScreenActivity.this, HappeningsActivity.class);

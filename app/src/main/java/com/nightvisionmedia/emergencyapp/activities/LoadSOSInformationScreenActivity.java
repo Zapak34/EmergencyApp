@@ -18,7 +18,8 @@ import android.view.MenuItem;
 
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.adapters.DisasterRecyclerViewAdapter;
-import com.nightvisionmedia.emergencyapp.adapters.TemporaryRecyclerViewAdapter;
+import com.nightvisionmedia.emergencyapp.adapters.Automotive_RoadSafetyRecyclerViewAdapter;
+import com.nightvisionmedia.emergencyapp.adapters.HouseholdRecyclerViewAdapter;
 import com.nightvisionmedia.emergencyapp.constants.CategoryIDs;
 import com.nightvisionmedia.emergencyapp.constants.Endpoints;
 import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
@@ -44,8 +45,8 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
 
     //DECLARE THE ADAPTERS FOR CATEGORIES
     private DisasterRecyclerViewAdapter disasterAdapter;
-    private TemporaryRecyclerViewAdapter temporaryAdapter;
-
+    private Automotive_RoadSafetyRecyclerViewAdapter automotiveRoadSafetyRecyclerViewAdapter;
+    private HouseholdRecyclerViewAdapter householdRecyclerViewAdapter;
 
 
     private List<MainRecyclerViewRowClass> data_list;
@@ -77,9 +78,12 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
         if(category_to_load.equals(CategoryIDs.disastersID)){
             disasterAdapter = new DisasterRecyclerViewAdapter(this,data_list);
             recyclerView.setAdapter(disasterAdapter);
-        }else  if(category_to_load.equals(CategoryIDs.temporaryID)){
-            temporaryAdapter = new TemporaryRecyclerViewAdapter(this,data_list);
-            recyclerView.setAdapter(temporaryAdapter);
+        }else  if(category_to_load.equals(CategoryIDs.automotiveRoadSafetyID)){
+            automotiveRoadSafetyRecyclerViewAdapter = new Automotive_RoadSafetyRecyclerViewAdapter(this,data_list);
+            recyclerView.setAdapter(automotiveRoadSafetyRecyclerViewAdapter);
+        }else if(category_to_load.equals(CategoryIDs.householdID)){
+            householdRecyclerViewAdapter = new HouseholdRecyclerViewAdapter(this,data_list);
+            recyclerView.setAdapter(householdRecyclerViewAdapter);
         }else{
             //Message.longToast(LoadSOSInformationScreenActivity.this,"Opps!! Error occurred, could not locate category");
             Message.longToast(LoadSOSInformationScreenActivity.this,"Please make sure this application is the latest version");
@@ -101,8 +105,10 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
         super.onResume();
         if(category_to_load.equals(CategoryIDs.disastersID)){
             disasterAdapter.notifyDataSetChanged();
-        }else if(category_to_load.equals(CategoryIDs.temporaryID)){
-            temporaryAdapter.notifyDataSetChanged();
+        }else if(category_to_load.equals(CategoryIDs.automotiveRoadSafetyID)){
+            automotiveRoadSafetyRecyclerViewAdapter.notifyDataSetChanged();
+        }else if(category_to_load.equals(CategoryIDs.householdID)){
+            householdRecyclerViewAdapter.notifyDataSetChanged();
         }
 
     }
@@ -151,8 +157,10 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
             protected void onPostExecute(Void aVoid) {
                 if(category_to_load.equals(CategoryIDs.disastersID)){
                     disasterAdapter.notifyDataSetChanged();
-                }else  if(category_to_load.equals(CategoryIDs.temporaryID)){
-                    temporaryAdapter.notifyDataSetChanged();
+                }else  if(category_to_load.equals(CategoryIDs.automotiveRoadSafetyID)){
+                    automotiveRoadSafetyRecyclerViewAdapter.notifyDataSetChanged();
+                }else if(category_to_load.equals(CategoryIDs.householdID)){
+                    householdRecyclerViewAdapter.notifyDataSetChanged();
                 }
                
             }
@@ -213,8 +221,10 @@ public class LoadSOSInformationScreenActivity extends AppCompatActivity implemen
 
         if(category_to_load.equals(CategoryIDs.disastersID)){
             disasterAdapter.setFilter(newList);
-        }else if(category_to_load.equals(CategoryIDs.temporaryID)){
-            temporaryAdapter.setFilter(newList);
+        }else if(category_to_load.equals(CategoryIDs.automotiveRoadSafetyID)){
+            automotiveRoadSafetyRecyclerViewAdapter.setFilter(newList);
+        }else if(category_to_load.equals(CategoryIDs.householdID)){
+            householdRecyclerViewAdapter.setFilter(newList);
         }
 
 

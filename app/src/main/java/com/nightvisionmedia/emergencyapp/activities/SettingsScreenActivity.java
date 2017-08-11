@@ -1,6 +1,9 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,9 +19,9 @@ import com.nightvisionmedia.emergencyapp.utils.Message;
 import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 public class SettingsScreenActivity extends AppCompatActivity {
-    private CheckBox chkBoxAutomaticLogin;
+    private CheckBox chkBoxAutomaticLogin, chkBoxOfflineMode;
     private TextView tvUpdateAccountInfo;
-
+    private boolean hasInternet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
 
         setupWidgets();
         setupListeners();
+        hasInternet = isNetworkAvailable();
     }
 
     private void setupListeners() {
@@ -39,6 +43,16 @@ public class SettingsScreenActivity extends AppCompatActivity {
             chkBoxAutomaticLogin.setText("Automatic Login (OFF)");
         }
 
+        final boolean isOffline = SharedPrefManager.getInstance(SettingsScreenActivity.this).getOfflineMode();
+        if(isOffline){
+            chkBoxOfflineMode.setChecked(true);
+            chkBoxOfflineMode.setText("Offline Mode (ON)");
+
+        }else{
+            chkBoxOfflineMode.setChecked(false);
+            chkBoxOfflineMode.setText("Offline Mode (OFF)");
+
+        }
         chkBoxAutomaticLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -54,11 +68,31 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
+        chkBoxOfflineMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(chkBoxOfflineMode.isChecked()){
+                    SharedPrefManager.getInstance(SettingsScreenActivity.this).setOfflineMode(true);
+                    Message.shortToast(SettingsScreenActivity.this,"Offline Mode Is Turned On...");
+                    chkBoxOfflineMode.setText("Offline Mode (ON)");
+                }else{
+                    SharedPrefManager.getInstance(SettingsScreenActivity.this).setOfflineMode(false);
+                    Message.shortToast(SettingsScreenActivity.this,"Offline Mode Is Turned Off...");
+                    chkBoxOfflineMode.setText("Offline Mode (OFF)");
+                }
+            }
+        });
 
         tvUpdateAccountInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SettingsScreenActivity.this, UpdateAccountScreenActivity.class));
+                hasInternet = isNetworkAvailable();
+                if(hasInternet && !SharedPrefManager.getInstance(SettingsScreenActivity.this).getOfflineMode()){
+                    startActivity(new Intent(SettingsScreenActivity.this, UpdateAccountScreenActivity.class));
+                }else{
+                    Message.shortToast(SettingsScreenActivity.this,"There is either no internet or you are in offline mode...");
+                }
+
             }
         });
 
@@ -66,6 +100,14 @@ public class SettingsScreenActivity extends AppCompatActivity {
 
     private void setupWidgets() {
         chkBoxAutomaticLogin = (CheckBox)findViewById(R.id.chkBoxAutomaticLogin);
+        chkBoxOfflineMode = (CheckBox)findViewById(R.id.chkBoxOfflineMode);
         tvUpdateAccountInfo = (TextView)findViewById(R.id.tvUpdateUserInfo);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

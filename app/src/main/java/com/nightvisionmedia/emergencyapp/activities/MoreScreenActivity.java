@@ -54,18 +54,34 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
                         break;
                     case R.id.ic_alerts:
                         Intent intent0 = new Intent(MoreScreenActivity.this, AlertsScreenActivity.class);
-                        startActivity(intent0);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(MoreScreenActivity.this).getOfflineMode()){
+                            startActivity(intent0);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            startActivity(new Intent(MoreScreenActivity.this, AlertsFavScreenActivity.class));
+                            Message.longToast(MoreScreenActivity.this,"You in offline mode so we'll open the the favorites for you");
+                        }
                         break;
                     case R.id.ic_need_help:
                         Intent intent1 = new Intent(MoreScreenActivity.this, SOSCategoriesScreenActivity.class);
-                        startActivity(intent1);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(MoreScreenActivity.this).getOfflineMode()){
+                            startActivity(intent1);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            Message.shortToast(MoreScreenActivity.this,"Open screen with all favorites for catigories");
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                        }
                         break;
                     case R.id.ic_happenings:
                         Intent intent2 = new Intent(MoreScreenActivity.this, HappeningsActivity.class);
-                        startActivity(intent2);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(MoreScreenActivity.this).getOfflineMode()){
+                            startActivity(intent2);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            startActivity(new Intent(MoreScreenActivity.this, HappningsFavScreenActivity.class));
+                            Message.longToast(MoreScreenActivity.this,"You in offline mode so we'll open the the favorites for you");
+                        }
                         break;
                     case R.id.ic_more:
 

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.nightvisionmedia.emergencyapp.R;
 import com.nightvisionmedia.emergencyapp.activities.ShowMainContentActivity;
 import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
-import com.nightvisionmedia.emergencyapp.sugar_models.TemporaryFavorites;
+import com.nightvisionmedia.emergencyapp.sugar_models.AutomotiveRoadSafetyFavorites;
 import com.nightvisionmedia.emergencyapp.utils.Message;
 
 import java.util.ArrayList;
@@ -23,12 +23,12 @@ import java.util.List;
  * Created by Omar (GAZAMAN) Myers on 6/29/2017.
  */
 
-public class TemporaryRecyclerViewAdapter extends RecyclerView.Adapter<TemporaryRecyclerViewAdapter.ViewHolder>{
+public class Automotive_RoadSafetyRecyclerViewAdapter extends RecyclerView.Adapter<Automotive_RoadSafetyRecyclerViewAdapter.ViewHolder>{
     private Context context;
     private List<MainRecyclerViewRowClass> my_data;
 
 
-    public TemporaryRecyclerViewAdapter(Context context, List<MainRecyclerViewRowClass> my_data) {
+    public Automotive_RoadSafetyRecyclerViewAdapter(Context context, List<MainRecyclerViewRowClass> my_data) {
         this.context = context;
         this.my_data = my_data;
     }
@@ -44,7 +44,7 @@ public class TemporaryRecyclerViewAdapter extends RecyclerView.Adapter<Temporary
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         //this sets the text of the text view to its respective data
-        holder.temporaryID = my_data.get(position).getId();
+        holder.automotiveRoadSafetyID = my_data.get(position).getId();
         holder.title.setText(my_data.get(position).getTitle());
         holder.content.setText(my_data.get(position).getContent());
         holder.time_posted.setText(my_data.get(position).getTime_posted());
@@ -68,8 +68,8 @@ public class TemporaryRecyclerViewAdapter extends RecyclerView.Adapter<Temporary
             holder.content.setTextSize(18);
         }
 
-        String[] temp = {String.valueOf(holder.temporaryID)};
-        holder.count =  TemporaryFavorites.count(TemporaryFavorites.class, "temporary_id = ?",temp);
+        String[] temp = {String.valueOf(holder.automotiveRoadSafetyID)};
+        holder.count =  AutomotiveRoadSafetyFavorites.count(AutomotiveRoadSafetyFavorites.class, "automotive_id = ?",temp);
         if(holder.count > 0){
             holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
         }else{
@@ -112,17 +112,17 @@ public class TemporaryRecyclerViewAdapter extends RecyclerView.Adapter<Temporary
         holder.ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] temp = {String.valueOf(holder.temporaryID)};
-                long countTemp =  TemporaryFavorites.count(TemporaryFavorites.class, "temporary_id = ?",temp);
+                String[] temp = {String.valueOf(holder.automotiveRoadSafetyID)};
+                long countTemp =  AutomotiveRoadSafetyFavorites.count(AutomotiveRoadSafetyFavorites.class, "automotive_id = ?",temp);
                     if(holder.count == 0)
                     {
                         //querying list return empty, there is no record found matching the query.
-                        TemporaryFavorites temporaryFavorites = new TemporaryFavorites();
-                        temporaryFavorites.setTemporaryID(holder.temporaryID);
-                        temporaryFavorites.setTemporaryTitle(holder.title.getText().toString());
-                        temporaryFavorites.setTemporaryContent(holder.content.getText().toString());
-                        temporaryFavorites.setTemporaryImageURL(holder.image_url);
-                        temporaryFavorites.setTemporaryPostedTime(holder.time_posted.getText().toString());
+                        AutomotiveRoadSafetyFavorites temporaryFavorites = new AutomotiveRoadSafetyFavorites();
+                        temporaryFavorites.setAutomotiveID(holder.automotiveRoadSafetyID);
+                        temporaryFavorites.setAutomotiveTitle(holder.title.getText().toString());
+                        temporaryFavorites.setAutomotiveContent(holder.content.getText().toString());
+                        temporaryFavorites.setAutomotiveImageURL(holder.image_url);
+                        temporaryFavorites.setAutomotivePostedTime(holder.time_posted.getText().toString());
                         temporaryFavorites.save();
 
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_on);
@@ -133,7 +133,7 @@ public class TemporaryRecyclerViewAdapter extends RecyclerView.Adapter<Temporary
                     {
 
                         //there are records matching your query.
-                        TemporaryFavorites.deleteAll(TemporaryFavorites.class, "temporary_id = ?", String.valueOf(holder.temporaryID));
+                        AutomotiveRoadSafetyFavorites.deleteAll(AutomotiveRoadSafetyFavorites.class, "automotive_id = ?", String.valueOf(holder.automotiveRoadSafetyID));
                         holder.ivFavorite.setImageResource(R.mipmap.ic_star_off);
                         Message.longToast(context, "Favorite Removed...");
                     }
@@ -150,7 +150,7 @@ public class TemporaryRecyclerViewAdapter extends RecyclerView.Adapter<Temporary
 
     //this class gets the each widget on the template for reference to give it the respective data
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public int temporaryID;
+        public int automotiveRoadSafetyID;
         public TextView content, title, time_posted;
         public ImageView ivImage, ivFavorite;
         public String image_url;

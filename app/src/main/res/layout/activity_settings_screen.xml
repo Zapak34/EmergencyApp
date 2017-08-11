@@ -39,6 +39,7 @@
                     android:id="@+id/tvUpdateUserInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:paddingLeft="25dp"
                     android:text="Update Account"
@@ -58,6 +59,21 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:text="Automatic Login"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/common_action_bar_splitter" />
+
+                <CheckBox
+                    android:id="@+id/chkBoxOfflineMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Offline Mode"
                     android:textSize="24sp" />
 
                 <TextView

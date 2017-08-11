@@ -25,6 +25,7 @@ import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
 import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.BottomNavigationHelper;
 import com.nightvisionmedia.emergencyapp.utils.Message;
+import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +45,7 @@ public class HappeningsActivity extends AppCompatActivity implements SearchView.
     private LinearLayoutManager linearLayoutManager;
     private HappeningsRecyclerViewAdapter adapter;
     private List<MainRecyclerViewRowClass> data_list;
+    private boolean hasInternet;
     private Toolbar toolbar;
 
 
@@ -54,9 +56,9 @@ public class HappeningsActivity extends AppCompatActivity implements SearchView.
 
         recyclerView = (RecyclerView)findViewById(R.id.happeningsRecyclerView);
         data_list = new ArrayList<>();
-        boolean hasInternet = isNetworkAvailable();
+        hasInternet = isNetworkAvailable();
         if(!hasInternet){
-            Message.longToast(HappeningsActivity.this, "There is no internet connection...");
+            Message.longToast(HappeningsActivity.this, "There is no internet connection, you can go to offline mode from settings...");
         }else {
             load_data_from_server();
         }
@@ -102,15 +104,32 @@ public class HappeningsActivity extends AppCompatActivity implements SearchView.
                         break;
                     case R.id.ic_alerts:
                         Intent intent0 = new Intent(HappeningsActivity.this, AlertsScreenActivity.class);
-                        startActivity(intent0);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(HappeningsActivity.this).getOfflineMode()){
+                            startActivity(intent0);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            startActivity(new Intent(HappeningsActivity.this, HappningsFavScreenActivity.class));
+                            Message.longToast(HappeningsActivity.this,"You in offline mode so we'll open the the favorites for you");
+                        }
+
                         break;
                     case R.id.ic_need_help:
                         Intent intent1 = new Intent(HappeningsActivity.this, SOSCategoriesScreenActivity.class);
-                        startActivity(intent1);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(HappeningsActivity.this).getOfflineMode()){
+                            startActivity(intent1);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            Message.shortToast(HappeningsActivity.this,"Open screen with all favorites for catigories");
+                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                        }
+
                         break;
                     case R.id.ic_happenings:
+                        if(!SharedPrefManager.getInstance(HappeningsActivity.this).getOfflineMode() || hasInternet){
+                            App.refreshActivity(HappeningsActivity.this);
+                        }else{
+                            startActivity(new Intent(HappeningsActivity.this, HappningsFavScreenActivity.class));
+                        }
                         break;
                     case R.id.ic_more:
                         Intent intent3 = new Intent(HappeningsActivity.this, MoreScreenActivity.class);

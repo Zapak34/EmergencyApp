@@ -25,6 +25,7 @@ import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
 import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.BottomNavigationHelper;
 import com.nightvisionmedia.emergencyapp.utils.Message;
+import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +46,7 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
     private AlertsRecyclerViewAdapter adapter;
     private List<MainRecyclerViewRowClass> data_list;
     private Toolbar toolbar;
+    private boolean hasInternet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,9 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
 
         recyclerView = (RecyclerView)findViewById(R.id.alertsRecyclerView);
         data_list = new ArrayList<>();
-        boolean hasInternet = isNetworkAvailable();
+        hasInternet = isNetworkAvailable();
         if(!hasInternet){
-            Message.longToast(AlertsScreenActivity.this, "There is no internet connection...");
+            Message.longToast(AlertsScreenActivity.this, "There is no internet connection, you can go to offline mode from settings...");
         }else {
             load_data_from_server();
         }
@@ -97,17 +99,31 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
                         android.os.Process.killProcess(android.os.Process.myPid());
                         break;
                     case R.id.ic_alerts:
-                        App.refreshActivity(AlertsScreenActivity.this);
+                        if(!SharedPrefManager.getInstance(AlertsScreenActivity.this).getOfflineMode() || hasInternet){
+                            App.refreshActivity(AlertsScreenActivity.this);
+                        }else{
+                            startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                        }
                         break;
                     case R.id.ic_need_help:
                         Intent intent1 = new Intent(AlertsScreenActivity.this, SOSCategoriesScreenActivity.class);
-                        startActivity(intent1);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(AlertsScreenActivity.this).getOfflineMode()){
+                            startActivity(intent1);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            Message.shortToast(AlertsScreenActivity.this,"Open screen with all favorites for catigories");
+                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                        }
+
                         break;
                     case R.id.ic_happenings:
                         Intent intent2 = new Intent(AlertsScreenActivity.this, HappeningsActivity.class);
-                        startActivity(intent2);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(AlertsScreenActivity.this).getOfflineMode()){
+                            startActivity(intent2);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            startActivity(new Intent(AlertsScreenActivity.this, HappningsFavScreenActivity.class));
+                        }
                         break;
                     case R.id.ic_more:
                         Intent intent3 = new Intent(AlertsScreenActivity.this, MoreScreenActivity.class);

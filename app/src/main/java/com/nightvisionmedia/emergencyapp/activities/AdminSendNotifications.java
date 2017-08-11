@@ -52,19 +52,17 @@ public class AdminSendNotifications extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendToAllPush();
-                addJob();
+                addPost();
             }
         });
     }
 
-    private void addJob(){
+    private void addPost(){
         final String title = edtTitle.getText().toString();
         final String message = edtMessage.getText().toString();
         final String image = edtImageURL.getText().toString();
-        //TODO OMAR CHANGES
-//        final String emails = email;
 
-        class AddEmployee extends AsyncTask<Void,Void,String> {
+        class AddPostToDatabase extends AsyncTask<Void,Void,String> {
 
             ProgressDialog loading;
 
@@ -79,7 +77,6 @@ public class AdminSendNotifications extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 if(showSent == 0){
-                    //showGenericDialog("FINISHED... ",s);
                     Message.longToast(AdminSendNotifications.this,s);
                     showSent = 1;
                 }
@@ -99,7 +96,7 @@ public class AdminSendNotifications extends AppCompatActivity {
             }
         }
 
-        AddEmployee ae = new AddEmployee();
+        AddPostToDatabase ae = new AddPostToDatabase();
         ae.execute();
     }
 
@@ -161,7 +158,7 @@ public class AdminSendNotifications extends AppCompatActivity {
         MyVolley.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    //TODO
+    //TODO DELETE LATER
 //    private void sendSinglePush(String emails) {
 //        final String title = edtTitle.getText().toString();
 //        final String message = edtMessage.getText().toString();

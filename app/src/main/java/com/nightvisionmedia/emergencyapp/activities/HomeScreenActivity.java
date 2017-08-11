@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.nightvisionmedia.emergencyapp.R;
+import com.nightvisionmedia.emergencyapp.sugar_models.AlertsFavorites;
 import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.BottomNavigationHelper;
 import com.nightvisionmedia.emergencyapp.utils.DialogHandler;
@@ -37,11 +38,14 @@ public class HomeScreenActivity extends AppCompatActivity {
         setupWidgets();
         setupListeners();
 
-        final int isFirstTimeLogin = SharedPrefManager.getInstance(HomeScreenActivity.this).getLoginScreenSaveAutoLoginShown();
-        if(isFirstTimeLogin == -1){
-            DialogHandler.SaveAutomaticLogin saveAutomaticLogin =new DialogHandler.SaveAutomaticLogin();
-            saveAutomaticLogin.show(getFragmentManager(), "No Name");
+        if(!SharedPrefManager.getInstance(HomeScreenActivity.this).getOfflineMode()){
+            final int isFirstTimeLogin = SharedPrefManager.getInstance(HomeScreenActivity.this).getLoginScreenSaveAutoLoginShown();
+            if(isFirstTimeLogin == -1){
+                DialogHandler.SaveAutomaticLogin saveAutomaticLogin =new DialogHandler.SaveAutomaticLogin();
+                saveAutomaticLogin.show(getFragmentManager(), "No Name");
+            }
         }
+
 
     }
 
@@ -67,18 +71,37 @@ public class HomeScreenActivity extends AppCompatActivity {
                         break;
                     case R.id.ic_alerts:
                         Intent intent1 = new Intent(HomeScreenActivity.this, AlertsScreenActivity.class);
-                        startActivity(intent1);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(HomeScreenActivity.this).getOfflineMode()){
+                            startActivity(intent1);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            startActivity(new Intent(HomeScreenActivity.this, AlertsFavScreenActivity.class));
+                            Message.longToast(HomeScreenActivity.this,"You in offline mode so we'll open the the favorites for you");
+                        }
+
+
                         break;
                     case R.id.ic_need_help:
                         Intent intent2 = new Intent(HomeScreenActivity.this, SOSCategoriesScreenActivity.class);
-                        startActivity(intent2);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(HomeScreenActivity.this).getOfflineMode()){
+                            startActivity(intent2);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            Message.shortToast(HomeScreenActivity.this,"Open screen with all favorites for catigories");
+                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                        }
+
                         break;
                     case R.id.ic_happenings:
                         Intent intent3 = new Intent(HomeScreenActivity.this, HappeningsActivity.class);
-                        startActivity(intent3);
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        if(!SharedPrefManager.getInstance(HomeScreenActivity.this).getOfflineMode()){
+                            startActivity(intent3);
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }else{
+                            startActivity(new Intent(HomeScreenActivity.this, HappningsFavScreenActivity.class));
+                            Message.longToast(HomeScreenActivity.this,"You in offline mode so we'll open the the favorites for you");
+                        }
+
                         break;
                     case R.id.ic_more:
                         Intent intent4 = new Intent(HomeScreenActivity.this, MoreScreenActivity.class);

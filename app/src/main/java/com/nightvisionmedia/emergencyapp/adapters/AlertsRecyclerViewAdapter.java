@@ -15,6 +15,7 @@ import com.nightvisionmedia.emergencyapp.activities.ShowMainContentActivity;
 import com.nightvisionmedia.emergencyapp.custom_models.MainRecyclerViewRowClass;
 import com.nightvisionmedia.emergencyapp.sugar_models.AlertsFavorites;
 import com.nightvisionmedia.emergencyapp.utils.Message;
+import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +46,16 @@ public class AlertsRecyclerViewAdapter extends RecyclerView.Adapter<AlertsRecycl
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         //this sets the text of the text view to its respective data
         holder.alertID = my_data.get(position).getId();
-        holder.title.setText(my_data.get(position).getTitle());
-        holder.content.setText(my_data.get(position).getContent());
+        holder.title.setText(my_data.get(position).getTitle().replace("[fname]", SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_EMAIL_KEY)));
+        
+        holder.content.setText(my_data.get(position).getContent().replace("[fname]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_FNAME_KEY))
+                .replace("[lname]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_LNAME_KEY))
+                .replace("[age]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_AGE_KEY))
+                .replace("[email]",SharedPrefManager.getInstance(context).getUserDetails(SharedPrefManager.USER_EMAIL_KEY)));
+        
         holder.time_posted.setText(my_data.get(position).getTime_posted());
         holder.image_url = my_data.get(position).getImage_link();
 

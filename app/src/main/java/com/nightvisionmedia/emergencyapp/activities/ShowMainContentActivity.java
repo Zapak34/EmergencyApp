@@ -60,17 +60,16 @@ public class ShowMainContentActivity extends AppCompatActivity {
         }else if(intent.hasExtra("isNotification") && SharedPrefManager.getInstance(ShowMainContentActivity.this).getAutomaticLogin() == -1){
             isNotification = 2;
         }
-
-        //position = getIntent().getExtras().getInt("position");
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if(isNotification == 1){
             startActivity(new Intent(ShowMainContentActivity.this,AlertsScreenActivity.class));
         }else if(isNotification == 2){
             startActivity(new Intent(ShowMainContentActivity.this,LoginScreenActivity.class));
         }
+        super.onBackPressed();
+
     }
 }
