@@ -81,6 +81,16 @@
                     android:layout_height="2dp"
                     android:background="@color/common_action_bar_splitter" />
 
+                <Button
+                    android:id="@+id/btnDeleteAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorAccent"
+                    android:text="Delete Account"
+                    android:textColor="@color/cardview_light_background" />
+
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

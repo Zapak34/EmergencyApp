@@ -1,6 +1,9 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 public class MoreScreenActivity extends AppCompatActivity implements MoreRecyclerViewAdapter.ClickListener{
     private RecyclerView recyclerView;
     private MoreRecyclerViewAdapter moreRecyclerViewAdapter;
-
+    private boolean hasInternet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
         recyclerView.setAdapter(moreRecyclerViewAdapter);
         moreRecyclerViewAdapter.setListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        hasInternet = isNetworkAvailable();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationHelper.disableShiftMode(bottomNavigationView);
@@ -68,9 +71,13 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
                             startActivity(intent1);
                             android.os.Process.killProcess(android.os.Process.myPid());
                         }else{
-                            Message.shortToast(MoreScreenActivity.this,"Open screen with all favorites for catigories");
-                            android.os.Process.killProcess(android.os.Process.myPid());
-                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                            if(SharedPrefManager.getInstance(MoreScreenActivity.this).getOfflineMode()){
+                                Message.shortToast(MoreScreenActivity.this,"You are in offline mode");
+                            }else if(!hasInternet){
+                                Message.shortToast(MoreScreenActivity.this,"There may not be any internet connection");
+                            }
+
+                            startActivity(new Intent(MoreScreenActivity.this, CategoryInfoFavScreenActivity.class));
                         }
                         break;
                     case R.id.ic_happenings:
@@ -91,6 +98,13 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
                 return false;
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     public ArrayList<MoreRecyclerViewRowClass> getData() {

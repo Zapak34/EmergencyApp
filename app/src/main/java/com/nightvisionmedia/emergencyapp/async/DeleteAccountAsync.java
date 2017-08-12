@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 
-import com.nightvisionmedia.emergencyapp.activities.HomeScreenActivity;
+import com.nightvisionmedia.emergencyapp.activities.LoginScreenActivity;
 import com.nightvisionmedia.emergencyapp.constants.Endpoints;
 import com.nightvisionmedia.emergencyapp.utils.App;
 import com.nightvisionmedia.emergencyapp.utils.Message;
+import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -27,16 +28,16 @@ import java.net.URLEncoder;
  * Created by Omar (GAZAMAN) Myers on 6/23/2017.
  */
 
-public class SendTokenToServerAsync extends AsyncTask <String, String, String>{
+public class DeleteAccountAsync extends AsyncTask <String, String, String>{
     private Context context;
     private int byGetOrPost = 0;
     private String fcm_token = "";
-    private String email = "";
+    private String email = "", password = "";
     private String action = "";
     //String fcm_token = "";
     //String mac_address = "";
     //flag 0 means get and 1 means post.(By default it is get.)
-    public SendTokenToServerAsync(Context context, int flag) {
+    public DeleteAccountAsync(Context context, int flag) {
         this.context = context;
         byGetOrPost = flag;
     }
@@ -50,11 +51,10 @@ public class SendTokenToServerAsync extends AsyncTask <String, String, String>{
 
             try{
                 email = params[0];
-                fcm_token = params[1];
-                action = params[2];
+                password = params[1];
+                //action = params[2];
 
-                String link = Endpoints.URL_SEND_TOKEN_TO_SERVER+"?"+Endpoints.KEY_PHP_FCM_TOKEN+"="+fcm_token+"&"
-                        +Endpoints.KEY_PHP_EMAIL+"="+email+"&"+Endpoints.KEY_PHP_ACTION+"="+action;
+                String link = Endpoints.URL_DELETE_USER_ACCOUNT+"?="+email+"&password="+password;
                 URL url = new URL(link);
                 HttpClient client = new DefaultHttpClient();
                 HttpGet request = new HttpGet();
@@ -79,19 +79,14 @@ public class SendTokenToServerAsync extends AsyncTask <String, String, String>{
         } else{
             try{
                 email = params[0];
-                fcm_token = params[1];
-                action = params[2];
+                password = params[1];
+                //action = params[2];
 
-                String link= Endpoints.URL_SEND_TOKEN_TO_SERVER;
+                String link= Endpoints.URL_DELETE_USER_ACCOUNT;
                 String data = URLEncoder.encode(Endpoints.KEY_PHP_EMAIL, "UTF-8") + "=" +
                         URLEncoder.encode(email, "UTF-8");
-
-                data  += "&" +URLEncoder.encode(Endpoints.KEY_PHP_FCM_TOKEN, "UTF-8") + "=" +
-                        URLEncoder.encode(fcm_token, "UTF-8");
-
-                data  += "&" +URLEncoder.encode(Endpoints.KEY_PHP_ACTION, "UTF-8") + "=" +
-                        URLEncoder.encode(action, "UTF-8");
-
+                data += "&" + URLEncoder.encode(Endpoints.KEY_PHP_PASSWORD, "UTF-8") + "=" +
+                        URLEncoder.encode(password, "UTF-8");
                 URL url = new URL(link);
                 URLConnection conn = url.openConnection();
 
@@ -123,12 +118,13 @@ public class SendTokenToServerAsync extends AsyncTask <String, String, String>{
     @Override
     protected void onPostExecute(String result){
 
-        if(result.equals("Successful") && action.equals("login")){
-            //Message.shortToast(context,"Token sent successfully");
-        }else if(result.equals("Successful")){
-            Message.shortToast(context,"Token successfully sent");
+        if(result.equals("Successful")){
+            Message.longToast(context,"Your account "+email+" has been deleted successfully");
+            SharedPrefManager.getInstance(context).saveUserDetailsOffline("","","","","","");
+            App.finishActivity((AppCompatActivity)context);
+            context.startActivity(new Intent(context, LoginScreenActivity.class));
         }else{
-            Message.shortToast(context,result);
+            Message.longToast(context,result);
         }
     }
 }

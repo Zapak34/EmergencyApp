@@ -1,6 +1,9 @@
 package com.nightvisionmedia.emergencyapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -27,7 +30,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private int logout = 0;
-
+    private boolean hasInternet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 //        getBundle();
         setupWidgets();
         setupListeners();
-
+        hasInternet = isNetworkAvailable();
         if(!SharedPrefManager.getInstance(HomeScreenActivity.this).getOfflineMode()){
             final int isFirstTimeLogin = SharedPrefManager.getInstance(HomeScreenActivity.this).getLoginScreenSaveAutoLoginShown();
             if(isFirstTimeLogin == -1){
@@ -48,6 +51,14 @@ public class HomeScreenActivity extends AppCompatActivity {
 
 
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
 //    private void getBundle() {
 //        Intent intent = getIntent();
@@ -65,6 +76,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                hasInternet = isNetworkAvailable();
                 switch(item.getItemId()){
                     case R.id.ic_home:
                         App.refreshActivity(HomeScreenActivity.this);
@@ -87,8 +99,13 @@ public class HomeScreenActivity extends AppCompatActivity {
                             startActivity(intent2);
                             android.os.Process.killProcess(android.os.Process.myPid());
                         }else{
-                            Message.shortToast(HomeScreenActivity.this,"Open screen with all favorites for catigories");
-                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                            if(SharedPrefManager.getInstance(HomeScreenActivity.this).getOfflineMode()){
+                                Message.shortToast(HomeScreenActivity.this,"You are in offline mode");
+                            }else if(!hasInternet){
+                                Message.shortToast(HomeScreenActivity.this,"There may not be any internet connection");
+                            }
+
+                            startActivity(new Intent(HomeScreenActivity.this, CategoryInfoFavScreenActivity.class));
                         }
 
                         break;

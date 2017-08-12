@@ -8,19 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.nightvisionmedia.emergencyapp.R;
+import com.nightvisionmedia.emergencyapp.async.DeleteAccountAsync;
+import com.nightvisionmedia.emergencyapp.constants.Endpoints;
 import com.nightvisionmedia.emergencyapp.utils.App;
+import com.nightvisionmedia.emergencyapp.utils.DialogHandler;
 import com.nightvisionmedia.emergencyapp.utils.Message;
 import com.nightvisionmedia.emergencyapp.utils.SharedPrefManager;
 
 public class SettingsScreenActivity extends AppCompatActivity {
     private CheckBox chkBoxAutomaticLogin, chkBoxOfflineMode;
     private TextView tvUpdateAccountInfo;
+    private Button btnDeleteAccount;
     private boolean hasInternet;
 
     @Override
@@ -96,12 +101,40 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
+        btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Message.longToast(SettingsScreenActivity.this,SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY)+" "+SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY));
+                DialogHandler.DeleteUserAccount deleteUserAccount = new DialogHandler.DeleteUserAccount();
+                Bundle bundle = new Bundle();
+                bundle.putString(Endpoints.KEY_BUNDLE_EMAIL, SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+                bundle.putString(Endpoints.KEY_BUNDLE_PASSWORD, SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY));
+                deleteUserAccount.setArguments(bundle);
+                deleteUserAccount.show(getFragmentManager(), "No Name");
+
+                DialogHandler.InfoDialog infoDialog = new DialogHandler.InfoDialog();
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("message","You are about to delete the account from your Ask MOE, This process is not reversible you will have to create a new account!!!");
+                infoDialog.setArguments(bundle1);
+                infoDialog.show(getFragmentManager(), "No Name");
+            }
+        });
+
     }
+
+//    private void showInfoMessage(String message) {
+//        DialogHandler.ErrorInForm errorInForm = new DialogHandler.ErrorInForm();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("message", message);
+//        errorInForm.setArguments(bundle);
+//        errorInForm.show(getFragmentManager(), "No Name");
+//    }
 
     private void setupWidgets() {
         chkBoxAutomaticLogin = (CheckBox)findViewById(R.id.chkBoxAutomaticLogin);
         chkBoxOfflineMode = (CheckBox)findViewById(R.id.chkBoxOfflineMode);
         tvUpdateAccountInfo = (TextView)findViewById(R.id.tvUpdateUserInfo);
+        btnDeleteAccount = (Button)findViewById(R.id.btnDeleteAccount);
     }
 
     private boolean isNetworkAvailable() {

@@ -119,8 +119,13 @@ public class HappeningsActivity extends AppCompatActivity implements SearchView.
                             startActivity(intent1);
                             android.os.Process.killProcess(android.os.Process.myPid());
                         }else{
-                            Message.shortToast(HappeningsActivity.this,"Open screen with all favorites for catigories");
-                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                            if(SharedPrefManager.getInstance(HappeningsActivity.this).getOfflineMode()){
+                                Message.shortToast(HappeningsActivity.this,"You are in offline mode");
+                            }else if(!hasInternet){
+                                Message.shortToast(HappeningsActivity.this,"There may not be any internet connection");
+                            }
+
+                            startActivity(new Intent(HappeningsActivity.this, CategoryInfoFavScreenActivity.class));
                         }
 
                         break;

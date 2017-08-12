@@ -111,8 +111,13 @@ public class AlertsScreenActivity extends AppCompatActivity implements SearchVie
                             startActivity(intent1);
                             android.os.Process.killProcess(android.os.Process.myPid());
                         }else{
-                            Message.shortToast(AlertsScreenActivity.this,"Open screen with all favorites for catigories");
-                            //startActivity(new Intent(AlertsScreenActivity.this, AlertsFavScreenActivity.class));
+                            if(SharedPrefManager.getInstance(AlertsScreenActivity.this).getOfflineMode()){
+                                Message.shortToast(AlertsScreenActivity.this,"You are in offline mode");
+                            }else if(!hasInternet){
+                                Message.shortToast(AlertsScreenActivity.this,"There may not be any internet connection");
+                            }
+
+                            startActivity(new Intent(AlertsScreenActivity.this, CategoryInfoFavScreenActivity.class));
                         }
 
                         break;

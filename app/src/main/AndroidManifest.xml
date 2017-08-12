@@ -63,7 +63,8 @@
         <activity android:name=".activities.ForgetPasswordScreenActivity" />
         <activity android:name=".activities.LoadSOSInformationScreenActivity" />
         <activity android:name=".activities.UpdateAccountScreenActivity" />
-        <activity android:name=".activities.ShowAllSosFavoritesScreenActivity"></activity>
+        <activity android:name=".activities.ShowAllSosFavoritesScreenActivity" />
+        <activity android:name=".activities.CategoryInfoFavScreenActivity"></activity>
     </application>
 
 </manifest>

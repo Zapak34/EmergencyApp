@@ -22,6 +22,7 @@ public class Endpoints {
     public final static String URL_GET_SOS_CATEGORIES ="http://nightvisionmediaapp.000webhostapp.com/getSOSCategories.php";
     public final static String URL_GET_HAPPENINGS ="http://nightvisionmediaapp.000webhostapp.com/getHappenings.php";
     public final static String URL_FORGET_PASSWORD ="http://nightvisionmediaapp.000webhostapp.com/forgetPassword.php?email=";
+    public final static String URL_DELETE_USER_ACCOUNT ="http://nightvisionmediaapp.000webhostapp.com/accountDeletion.php";
 
     //URL AND PHP KEYS
     public static final String KEY_USER_ID = "user_id";
@@ -52,6 +53,7 @@ public class Endpoints {
     public static final String KEY_PHP_MESSAGE = "message";
     public static final String KEY_PHP_IMAGE = "image";
     public static final String KEY_PHP_EMAIL = "email";
+    public static final String KEY_PHP_PASSWORD = "password";
     public static final String KEY_PHP_TYPE = "type";
     public static final String KEY_PHP_FCM_TOKEN = "fcm_token";
     public static final String KEY_PHP_ACTION = "action";
