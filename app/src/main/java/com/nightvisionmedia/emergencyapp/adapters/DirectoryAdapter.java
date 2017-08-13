@@ -52,6 +52,7 @@ public class DirectoryAdapter extends ExpandableRecyclerAdapter <DirectoryAdapte
         });
     }
 
+
     @Override
     public TitleParentViewHolder onCreateParentViewHolder(ViewGroup viewGroup) {
         View view = inflater.inflate(R.layout.directory_row_parent,viewGroup,false);
@@ -114,12 +115,15 @@ public class DirectoryAdapter extends ExpandableRecyclerAdapter <DirectoryAdapte
 
    }
 
+
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        if (ttsObject != null) {
+        if(ttsObject != null){
             ttsObject.stop();
             ttsObject.shutdown();
         }
     }
+
+
 }

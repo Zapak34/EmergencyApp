@@ -123,9 +123,7 @@ public class SendTokenToServerAsync extends AsyncTask <String, String, String>{
     @Override
     protected void onPostExecute(String result){
 
-        if(result.equals("Successful") && action.equals("login")){
-            //Message.shortToast(context,"Token sent successfully");
-        }else if(result.equals("Successful")){
+        if(result.equals("Successfully")){
             Message.shortToast(context,"Token successfully sent");
         }else{
             Message.shortToast(context,result);

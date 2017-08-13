@@ -129,7 +129,9 @@ public class MoreScreenActivity extends AppCompatActivity implements MoreRecycle
         switch(position){
             case 0:
                 SharedPrefManager.getInstance(MoreScreenActivity.this).logoutFromApp(0);
-                startActivity(new Intent(MoreScreenActivity.this,LoginScreenActivity.class));
+                Intent intent = new Intent(MoreScreenActivity.this,LoginScreenActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 Message.longToast(MoreScreenActivity.this,"You Are Logged Out...");
                 finish();
                 break;

@@ -122,7 +122,9 @@ public class DeleteAccountAsync extends AsyncTask <String, String, String>{
             Message.longToast(context,"Your account "+email+" has been deleted successfully");
             SharedPrefManager.getInstance(context).saveUserDetailsOffline("","","","","","");
             App.finishActivity((AppCompatActivity)context);
-            context.startActivity(new Intent(context, LoginScreenActivity.class));
+            Intent intent = new Intent(context, LoginScreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
         }else{
             Message.longToast(context,result);
         }

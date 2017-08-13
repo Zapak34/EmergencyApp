@@ -108,7 +108,21 @@ public class RegisterScreenActivity extends AppCompatActivity {
 //     Matcher phoneMatcher = phone.matcher(cell);
         Matcher emailMatcher = emailPattern.matcher(email);
         if(!fname.equals("") && !lname.equals("") && !age.equals("") && !email.equals("") && !password.equals("") && password.equals(confirmPass) && emailMatcher.matches()){
-            isValid = true;
+            String fnameSpaceCheck = String.valueOf(fname.charAt(0));
+            String lnameSpaceCheck = String.valueOf(lname.charAt(0));
+            if(fnameSpaceCheck.equals(" ") || lnameSpaceCheck.equals(" ")){
+                isValid = false;
+                if(fname.charAt(0) == ' '){
+                    edtFirstName.setError("First Name must not start with any spaces");
+                }
+
+                if(lname.charAt(0) == ' '){
+                    edtLastName.setError("Last Name must not start with any spaces");
+                }
+
+            }else{
+                isValid = true;
+            }
         }else{
             isValid = false;
             if(fname.isEmpty()){

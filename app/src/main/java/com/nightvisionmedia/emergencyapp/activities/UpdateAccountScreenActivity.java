@@ -169,8 +169,23 @@ public class UpdateAccountScreenActivity extends AppCompatActivity {
         //Matcher matcher = namePatterns.matcher(fname);
 //     Matcher phoneMatcher = phone.matcher(cell);
         Matcher emailMatcher = emailPattern.matcher(email);
-        if(!fname.equals("") && !lname.equals("") && !age.equals("") && !email.equals("") && !password.equals("") && password.equals(confirmPass) && emailMatcher.matches()){
-            isValid = true;
+        if(!fname.equals("") && !lname.equals("") && !age.equals("") && (!email.equals("") || !email.contains(" ")) && !password.equals("") && password.equals(confirmPass) && emailMatcher.matches()){
+            String fnameSpaceCheck = String.valueOf(fname.charAt(0));
+            String lnameSpaceCheck = String.valueOf(lname.charAt(0));
+            if(fnameSpaceCheck.equals(" ") || lnameSpaceCheck.equals(" ")){
+                isValid = false;
+                if(fname.charAt(0) == ' '){
+                    edtFirstName.setError("First Name must not start with any spaces");
+                }
+
+                if(lname.charAt(0) == ' '){
+                    edtLastName.setError("Last Name must not start with any spaces");
+                }
+
+            }else{
+                isValid = true;
+            }
+
         }else{
             isValid = false;
             if(fname.isEmpty()){
@@ -192,8 +207,11 @@ public class UpdateAccountScreenActivity extends AppCompatActivity {
                 //showErrorMessage("Please enter your first name");
             }
 
-            if(email.isEmpty()){
+            if(email.isEmpty() || email.contains(" ")){
                 edtEmailAddress.setError("Please enter your email address, Example: example@email.com");
+                if(email.contains(" ")){
+                    edtEmailAddress.setError("Email must not contain any spaces");
+                }
                 //showErrorMessage("Please enter your first name");
             }else if(!emailMatcher.matches()){
                 edtEmailAddress.setError("Invalid email address format, Example: example@email.com");

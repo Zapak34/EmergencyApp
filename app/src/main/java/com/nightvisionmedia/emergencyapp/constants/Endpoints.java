@@ -23,6 +23,7 @@ public class Endpoints {
     public final static String URL_GET_HAPPENINGS ="http://nightvisionmediaapp.000webhostapp.com/getHappenings.php";
     public final static String URL_FORGET_PASSWORD ="http://nightvisionmediaapp.000webhostapp.com/forgetPassword.php?email=";
     public final static String URL_DELETE_USER_ACCOUNT ="http://nightvisionmediaapp.000webhostapp.com/accountDeletion.php";
+    public final static String URL_GET_HOME_PAGE_ARTICLE ="http://nightvisionmediaapp.000webhostapp.com/getHomepageArticle.php";
 
     //URL AND PHP KEYS
     public static final String KEY_USER_ID = "user_id";

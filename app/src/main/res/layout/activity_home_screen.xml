@@ -7,46 +7,47 @@
     tools:context="com.nightvisionmedia.emergencyapp.activities.HomeScreenActivity">
 
     <RelativeLayout
+        android:id="@+id/relLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/relLayout">
+        android:layout_height="match_parent">
 
         <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/topToolbarNormal"-->
-            <!--android:id="@+id/relLayoutTopBar"-->
-            <!--android:layout_alignParentTop="true">-->
-            <!--<android.support.design.widget.AppBarLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent">-->
-                <!--<android.support.v7.widget.Toolbar-->
-                    <!--android:id="@+id/homeToolbar"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--app:titleTextAppearance="@style/Toolbar.TitleTextLarge"-->
-                    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-                    <!--/>-->
-            <!--</android.support.design.widget.AppBarLayout>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/topToolbarNormal"-->
+        <!--android:id="@+id/relLayoutTopBar"-->
+        <!--android:layout_alignParentTop="true">-->
+        <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/homeToolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:titleTextAppearance="@style/Toolbar.TitleTextLarge"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--/>-->
+        <!--</android.support.design.widget.AppBarLayout>-->
         <!--</RelativeLayout>-->
 
 
+
+
         <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@+id/relLayoutTopBar"
-            android:id="@+id/relativeLayout">
+            android:layout_below="@+id/relLayoutTopBar">
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
                 android:background="?attr/colorButtonNormal"
                 android:orientation="horizontal"
-                android:weightSum="100"
-                android:id="@+id/linearLayout"
-                android:layout_alignParentBottom="true">
+                android:weightSum="100">
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -82,55 +83,125 @@
 
 
         <!--<ScrollView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_below="@+id/relLayout"-->
-            <!--android:layout_weight="0-->
-<!--">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/relLayout"-->
+        <!--android:layout_weight="0-->
+        <!--">-->
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical">-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-                <!--<Button-->
-                    <!--android:id="@+id/btnAdminScreen"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Test Notification" />-->
-            <!--</LinearLayout>-->
+        <!--<Button-->
+        <!--android:id="@+id/btnAdminScreen"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Test Notification" />-->
+        <!--</LinearLayout>-->
         <!--</ScrollView>-->
 
         <RelativeLayout
+            android:id="@+id/relLayoutBottomBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottomToolbarNormal"
-            android:id="@+id/relLayoutBottomBar"
             android:layout_alignParentBottom="true">
+
             <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bottomNavView_Bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/bottomNavView_Bar"
                 android:background="@drawable/white_grey_border_top"
-                app:menu="@menu/bottom_navigation_menu">
-            </android.support.design.widget.BottomNavigationView>
+                app:menu="@menu/bottom_navigation_menu"/>
+
         </RelativeLayout>
+
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
+            android:layout_height="30dp"
+            android:layout_above="@+id/relLayoutBottomBar"
             android:layout_below="@+id/relativeLayout"
-            android:layout_above="@+id/relLayoutBottomBar">
+            android:layout_centerHorizontal="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Latest Alert"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewLatestHappenings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/recyclerViewLatestAlerts">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Latest Happening"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewLatestAlerts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout" >
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/common_action_bar_splitter" />
+
+                <TextView
+                    android:id="@+id/tvArticleTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:text="Article Title"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvArticleMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="TextView"
+                    android:textAlignment="viewStart"
+                    android:textColor="?attr/editTextColor"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+
                 <Button
-                android:id="@+id/btnAdminScreen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Test Notification" />
+                    android:id="@+id/btnAdminScreen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Notification" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

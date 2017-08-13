@@ -104,19 +104,24 @@ public class SettingsScreenActivity extends AppCompatActivity {
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Message.longToast(SettingsScreenActivity.this,SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY)+" "+SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY));
-                DialogHandler.DeleteUserAccount deleteUserAccount = new DialogHandler.DeleteUserAccount();
-                Bundle bundle = new Bundle();
-                bundle.putString(Endpoints.KEY_BUNDLE_EMAIL, SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
-                bundle.putString(Endpoints.KEY_BUNDLE_PASSWORD, SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY));
-                deleteUserAccount.setArguments(bundle);
-                deleteUserAccount.show(getFragmentManager(), "No Name");
+                hasInternet = isNetworkAvailable();
+                if(hasInternet && !SharedPrefManager.getInstance(SettingsScreenActivity.this).getOfflineMode()){
+                    DialogHandler.DeleteUserAccount deleteUserAccount = new DialogHandler.DeleteUserAccount();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Endpoints.KEY_BUNDLE_EMAIL, SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_EMAIL_KEY));
+                    bundle.putString(Endpoints.KEY_BUNDLE_PASSWORD, SharedPrefManager.getInstance(SettingsScreenActivity.this).getUserDetails(SharedPrefManager.USER_PASSWORD_KEY));
+                    deleteUserAccount.setArguments(bundle);
+                    deleteUserAccount.show(getFragmentManager(), "No Name");
 
-                DialogHandler.InfoDialog infoDialog = new DialogHandler.InfoDialog();
-                Bundle bundle1 = new Bundle();
-                bundle1.putString("message","You are about to delete the account from your Ask MOE, This process is not reversible you will have to create a new account!!!");
-                infoDialog.setArguments(bundle1);
-                infoDialog.show(getFragmentManager(), "No Name");
+                    DialogHandler.InfoDialog infoDialog = new DialogHandler.InfoDialog();
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("message","You are about to delete the account from your Ask MOE, This process is not reversible you will have to create a new account!!!");
+                    infoDialog.setArguments(bundle1);
+                    infoDialog.show(getFragmentManager(), "No Name");
+                }else{
+                    Message.shortToast(SettingsScreenActivity.this,"There is either no internet or you are in offline mode...");
+                }
+
             }
         });
 
